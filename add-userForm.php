@@ -2,6 +2,12 @@
   ini_set('display_errors', 1);
   ini_set('display_startup_errors', 1);
   error_reporting(E_ALL);
+
+  session_start();
+  if(empty($_SESSION) || $_SESSION['role'] !== "admin"){
+    header("Location:login-form.php");
+  }
+  
   if($_GET){ 
       $errors = json_decode($_GET['errors']);
       $old = json_decode($_GET['old']);

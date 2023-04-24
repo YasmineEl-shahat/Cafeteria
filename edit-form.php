@@ -5,6 +5,13 @@
 
     include 'Database/Database.php';
 
+    
+    session_start();
+   
+    if(empty($_SESSION) || $_SESSION['role'] !== "admin"){
+        header("Location:login-form.php");
+    }
+    
     $user_id = $_GET['id'];
     $edit_url="edit-user.php?id={$user_id}";
 

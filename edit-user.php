@@ -6,6 +6,11 @@
     include 'validation/validation.php';
     include 'Database/Database.php';
 
+    session_start();
+   
+    if(empty($_SESSION) || $_SESSION['role'] !== "admin"){
+        header("Location:login-form.php");
+    }
     // call validation and extract needed data
     $validations = validate();
     $formerrors = $validations["errors"];

@@ -6,6 +6,13 @@
     include 'validation/validation.php';
     include 'Database/Database.php';
 
+    
+    session_start();
+   
+    if(empty($_SESSION) || $_SESSION['role'] !== "admin"){
+        header("Location:login-form.php");
+    }
+    
     // call validation and extract needed data
     $validations = validate();
     $formerrors = $validations["errors"];
@@ -31,8 +38,8 @@
         // save data 
         $database = new Database();
         $db = $database -> connect("phplab4", "root", "asd5693");
-        $database -> insert($db,"phplab4", "users", "name", "email","password", "room", "`profile-pic`",
-                    $_POST['name'], $_POST['email'], $_POST['password'],$_POST['room'], $imagespath);
+        $database -> insert($db,"phplab4", "users", "name", "email","password", "room", "`profile-pic`", "role",
+                    $_POST['name'], $_POST['email'], $_POST['password'],$_POST['room'], $imagespath, "user");
         header("Location:users-table.php");
     }
 ?>

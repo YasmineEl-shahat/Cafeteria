@@ -8,6 +8,13 @@
    
     include 'Database/Database.php';
 
+   
+    session_start();
+   
+    if(empty($_SESSION) || $_SESSION['role'] !== "admin"){
+        header("Location:login-form.php");
+    }
+
     echo "<div class='container' >  ";
 
     echo 

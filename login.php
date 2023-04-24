@@ -34,6 +34,7 @@ else if($user['password'] !== $password){
 else {
     session_start();
     $_SESSION["username"]=$user['name'];
+    $_SESSION["role"]=$user['role'];
     header("Location:homepage.php");
 }
 
