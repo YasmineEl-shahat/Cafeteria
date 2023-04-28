@@ -5,6 +5,7 @@
 
     include '../../validation/validation.php';
     include '../../models/product.php';
+    include '../../models/category.php';
 
     include "../../guard/adminAuth.php";
    
@@ -30,12 +31,16 @@
     // else {
         // uploading image
         sys_get_temp_dir();
-        move_uploaded_file($profile_tmp,"../../assets/images/products/{$product_image}");
+        move_uploaded_file($product_tmp,"../../assets/images/products/{$product_image}");
         $imagespath = "../../assets/images/products/{$product_image}";
         // save data 
         $product = new Product();
-        $product -> insertProduct("name", "price", "image", "category",
-                    $_POST['name'], $_POST['price'], $imagespath, $_POST['category']);
+        $categoryName = $_POST['category'];
+        $category = new Category();
+        $categoryId = $category->selectCategoryIdByName($categoryName);
+
+        $product->insertProduct("name", "price", "image", "category_id",
+            $_POST['name'], $_POST['price'], $imagespath, $categoryId);
         header("Location:../../views/product/products-table.php");
     // }
 ?>

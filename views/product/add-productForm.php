@@ -24,6 +24,9 @@ include "../../guard/adminAuth.php";
 	                <div class="form-group">
 	                  <input type="number" class="form-control" placeholder="Product Price" name='price'>
 	                </div>
+                  <div class="form-group">
+	                  <input type="number" class="form-control" placeholder="Product Price" name='available'>
+	                </div>
                     <div class="form-group">
                     <label for="category">Product Category</label>
                     <select id="category" name="category" class="form-control" name='category'>
