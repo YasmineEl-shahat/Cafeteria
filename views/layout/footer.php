@@ -17,7 +17,7 @@
                 <div class="ftco-footer-widget mb-4">
                     <h2 class="ftco-heading-2">Recent Blog</h2>
                     <div class="block-21 mb-4 d-flex">
-                        <a class="blog-img mr-4" style="background-image: url(../../assets/images/image_1.jpg);"></a>
+                        <a class="blog-img mr-4" style="background-image: url(../../../assets/images/image_1.jpg);"></a>
                         <div class="text">
                             <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about</a></h3>
                             <div class="meta">
@@ -28,7 +28,7 @@
                         </div>
                     </div>
                     <div class="block-21 mb-4 d-flex">
-                        <a class="blog-img mr-4" style="background-image: url(../../assets/images/image_2.jpg);"></a>
+                        <a class="blog-img mr-4" style="background-image: url(../../../assets/images/image_2.jpg);"></a>
                         <div class="text">
                             <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about</a></h3>
                             <div class="meta">
@@ -84,6 +84,24 @@
         <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
         <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" />
     </svg></div>
+
+    <script>
+  // Add click event listener to all icons with the "data-toggle" attribute
+  document.querySelectorAll('[data-toggle="nested-table"]').forEach(function(icon) {
+    icon.addEventListener('click', function() {
+      // Get the target table from the "data-target" attribute
+      var targetTableId = this.getAttribute('data-target');
+      var targetTable = document.querySelector(targetTableId);
+      if (targetTable) {
+        // Toggle the "nested-table-visible" class to show or hide the table
+        targetTable.classList.toggle('nested-table-visible');
+        // Toggle the icon between "plus" and "minus"
+        this.classList.toggle('fa-plus');
+        this.classList.toggle('fa-minus');
+      }
+    });
+  });
+</script>
 
 
 <script src="../../assets/js/jquery.min.js"></script>
