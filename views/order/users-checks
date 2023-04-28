@@ -1,11 +1,20 @@
 <?php
+<<<<<<< HEAD
     include '../layout/navbar.php'; 
     include '../layout/home-slider.php';
+=======
+    include './layout/navbar.php'; 
+    include './layout/home-slider.php';
+>>>>>>> 4e35b2b50bfc5d9e90855a4b6abb4abce19731dc
     
     ?>
 
 
 
 <?php 
+<<<<<<< HEAD
     include '../layout/footer.php';
+=======
+    include './layout/footer.php';
+>>>>>>> 4e35b2b50bfc5d9e90855a4b6abb4abce19731dc
 ?>

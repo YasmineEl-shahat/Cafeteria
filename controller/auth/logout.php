@@ -9,18 +9,11 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 echo "<div class='container fs-5' >  ";
-
-
-
-#### print username from the info saved on the server in the session ?
 session_start();
-if(!empty($_SESSION)){
-    echo "<h1> Welcome {$_SESSION['username']} </h1>";
-}else{
-    header("Location:login-form.php");
+if(isset($_SESSION)){
+    $_SESSION = array();
+    session_destroy();
+    setcookie('PHPSESSID', '', time()-3600, '/', '', 0);
+    header("Location:../../views/auth/login-form.php");
 }
-
-echo '<a href="logout.php" class="btn btn-danger">Logout </a>';
-
 ?>
-

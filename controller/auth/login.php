@@ -9,33 +9,33 @@ error_reporting(E_ALL);
 
 echo "<div class='container fs-5' >  ";
 
-include 'Database/Database.php';
+include '../../models/user.php';
 
 $email = $_POST["email"];
 $password = $_POST["password"];
 
-$database = new Database();
-$db = $database -> connect();
-$user = $database -> select_item_email( "User", $email);
+$user = new User();
+
+$user = $user -> select_item_email($email);
 
 
 if(!$user){
     $error = "email not found";
     $error=json_encode($error);
-    $redirect_url = "Location:login-form.php?error={$error}";
+    $redirect_url = "Location:../../views/auth/login-form.php?error={$error}";
     header($redirect_url);
 }
 else if($user['password'] !== $password){
     $error = "invalid password";
     $error=json_encode($error);
-    $redirect_url = "Location:login-form.php?error={$error}";
+    $redirect_url = "Location:../../views/auth/login-form.php?error={$error}";
     header($redirect_url);
 }
 else {
     session_start();
     $_SESSION["username"]=$user['username'];
     $_SESSION["role"]=$user['is_admin'];
-    header("Location:homepage.php");
+    header("Location:../../views/home");
 }
 
 

@@ -8,12 +8,12 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-echo "<div class='container fs-5' >  ";
-session_start();
-if(isset($_SESSION)){
-    $_SESSION = array();
-    session_destroy();
-    setcookie('PHPSESSID', '', time()-3600, '/', '', 0);
-    header("Location:login-form.php");
-}
+include "../../guard/auth.php";
+
+#### print username from the info saved on the server in the session ?
+auth("../auth/login-form.php");
+
+echo "<h1> Welcome {$_SESSION['username']} </h1>";
+echo '<a href="../../controller/auth/logout.php" class="btn btn-danger">Logout </a>';
 ?>
+

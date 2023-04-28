@@ -7,24 +7,25 @@
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
 
-    include 'Database/Database.php';
+    include '../../models/user.php';
 
 
-    session_start();
+ 
+    include "../../guard/adminAuth.php";
    
-    if(empty($_SESSION) || $_SESSION['role'] !== 1){
-        header("Location:login-form.php");
-    }
-
+    adminAuth("../../views/auth/login-form.php");
+    
     $user_id = $_GET['id'];
 
     ############################# Delete
 
-    $database = new Database();
-    $db = $database -> connect();
-    $imagePath = $database->select_item( "User", $user_id)["profile-pic"];
-    unlink($imagePath);
-    $database -> delete( "User", $user_id);
+    $user = new User();
 
-    header("Location:users-table.php");
+    $imagePath = $user->select_user($user_id)["profile-pic"];
+
+    if(file_exists( $imagePath)) unlink($imagePath);
+
+    $user -> delete_user($user_id);
+
+    header("Location:../../views/user/users-table.php");
 ?>

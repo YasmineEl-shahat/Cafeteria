@@ -3,10 +3,9 @@
   ini_set('display_startup_errors', 1);
   error_reporting(E_ALL);
 
-  session_start();
-  if(empty($_SESSION) || $_SESSION['role'] !== 1){
-    header("Location:login-form.php");
-  }
+  include "../../guard/adminAuth.php";
+
+  adminAuth("../auth/login-form.php");
   
   if($_GET){ 
       $errors = json_decode($_GET['errors']);
@@ -26,13 +25,13 @@
 <body>
 <div class="container">
     <h1> Add new User</h1>
-    <form method="post" action="add-user.php" enctype="multipart/form-data">
+    <form method="post" action="../../controller/user/add-user.php" enctype="multipart/form-data">
          <div class="mb-3">
             <label for="exampleInputName" class="form-label">Name</label>
             <input type="text" class="form-control"
-             name='name' id="exampleInputName" 
-             value="<?php echo $oldValues['name'] ?? "" ?>">
-            <div class="text-danger"> <?php  if(isset($errors['name']))  echo $errors['name']; ?></div>
+             name='username' id="exampleInputName" 
+             value="<?php echo $oldValues['username'] ?? "" ?>">
+            <div class="text-danger"> <?php  if(isset($errors['username']))  echo $errors['username']; ?></div>
         </div>
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Email</label>
