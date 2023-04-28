@@ -8,7 +8,7 @@
 
     session_start();
    
-    if(empty($_SESSION) || $_SESSION['role'] !== "admin"){
+    if(empty($_SESSION) || $_SESSION['role'] !== 1){
         header("Location:login-form.php");
     }
     // call validation and extract needed data
@@ -41,16 +41,16 @@
         try {
             // connect to database 
             $database = new Database();
-            $db = $database -> connect("phplab4", "root", "asd5693");
+            $db = $database -> connect();
 
             $id = $_GET['id'];
             
            
             if($imagespath)        
-                $database -> update($db,"phplab4", "users", $id,"name", "email","password", "room", "`profile-pic`",
+                $database -> update("User", $id,"username", "email","password", "room", "`profile-pic`",
                 $_POST['name'], $_POST['email'], $_POST['password'],$_POST['room'], $imagespath);
             else 
-                $database -> update($db,"phplab4", "users", $id,"name", "email","password", "room", 
+                $database -> update( "users", $id,"name", "email","password", "room", 
                 $_POST['name'], $_POST['email'], $_POST['password'],$_POST['room']);
            
             header("Location:users-table.php");

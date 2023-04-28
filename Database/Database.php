@@ -1,12 +1,15 @@
 <?php
 class Database{
-    function connect(string $dbname,string $user,string $password){
-        $dsn = 'mysql:dbname='.$dbname.';host=127.0.0.1;port=3306;'; 
-        $db= new PDO($dsn, $user, $password);
+    function connect(){
+        $dsn = 'mysql:dbname=php_nabila;host=nader-mo.tech;port=3306;'; 
+        $db= new PDO($dsn, 'php_nabila', 'Aa123456');
         return $db;
     }
-    function insert($db,string $dbname, string $table, ...$args){
+    function insert( string $table, ...$args){
         // save data 
+        $database = new Database();
+        $db = $database -> connect();
+        $dbname='php_nabila';
         try {
             // prepare query fill it with column names
             $insert_query =  "insert into ".$dbname.".".$table." (";
@@ -37,7 +40,10 @@ class Database{
             var_dump($e);
         }
     }
-    function select($db, string $dbname, string $table){
+    function select( string $table){
+        $database = new Database();
+        $db = $database -> connect();
+        $dbname='php_nabila';
 
         $query = "select * from ".$dbname.".".$table;
 
@@ -51,7 +57,10 @@ class Database{
         $stmt->closeCursor();
         return $data;
     }
-    function select_item($db, string $dbname, string $table, int $id){
+    function select_item( string $table, int $id){
+        $database = new Database();
+        $db = $database -> connect();
+        $dbname='php_nabila';
         $query = "select * from ".$dbname.".".$table." where id=:user_id";
         $stmt = $db->prepare($query);
         $stmt->bindParam(':user_id', $id, PDO::PARAM_INT);
@@ -59,7 +68,11 @@ class Database{
         $data = $stmt->fetch(PDO::FETCH_ASSOC);
         return $data;
     }
-    function select_item_email($db, string $dbname, string $table, string $email){
+    function select_item_email( string $table, string $email){
+        $database = new Database();
+        $db = $database -> connect();
+        $dbname='php_nabila';
+        var_dump($email);
         $query = "select * from ".$dbname.".".$table." where email=:user_email";
         $stmt = $db->prepare($query);
         $stmt->bindParam(':user_email', $email, PDO::PARAM_STR);
@@ -67,7 +80,10 @@ class Database{
         $data = $stmt->fetch(PDO::FETCH_ASSOC);
         return $data;
     }
-    function update($db, string $dbname, string $table, int $id, ...$args){
+    function update( string $table, int $id, ...$args){
+        $database = new Database();
+        $db = $database -> connect();
+        $dbname='php_nabila';
         $query= "update ".$dbname.".".$table." set ";
        
         for($i = 0; $i < sizeof($args) / 2; $i++)
@@ -86,7 +102,10 @@ class Database{
         $res=$stmt->execute($values);
         
     }
-    function delete($db, string $dbname, string $table, int $id){
+    function delete( string $table, int $id){
+        $database = new Database();
+        $db = $database -> connect();
+        $dbname='php_nabila';
         $query="Delete from ".$dbname.".".$table." where id=:user_id";
         $delete_stmt = $db->prepare($query);
         $delete_stmt->bindParam(':user_id', $id, PDO::PARAM_INT);

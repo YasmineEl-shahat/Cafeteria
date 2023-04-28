@@ -4,7 +4,7 @@
   error_reporting(E_ALL);
 
   session_start();
-  if(empty($_SESSION) || $_SESSION['role'] !== "admin"){
+  if(empty($_SESSION) || $_SESSION['role'] !== 1){
     header("Location:login-form.php");
   }
   

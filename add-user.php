@@ -9,7 +9,7 @@
     
     session_start();
    
-    if(empty($_SESSION) || $_SESSION['role'] !== "admin"){
+    if(empty($_SESSION) || $_SESSION['role'] !== 1){
         header("Location:login-form.php");
     }
     
@@ -37,8 +37,8 @@
         $imagespath = "images/{$profile_name}";
         // save data 
         $database = new Database();
-        $db = $database -> connect("phplab4", "root", "asd5693");
-        $database -> insert($db,"phplab4", "users", "name", "email","password", "room", "`profile-pic`", "role",
+        $db = $database -> connect();
+        $database -> insert( "User", "username", "email","password", "room", "`profile-pic`", "isAdmin",
                     $_POST['name'], $_POST['email'], $_POST['password'],$_POST['room'], $imagespath, "user");
         header("Location:users-table.php");
     }

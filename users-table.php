@@ -11,7 +11,7 @@
    
     session_start();
    
-    if(empty($_SESSION) || $_SESSION['role'] !== "admin"){
+    if(empty($_SESSION) || $_SESSION['role'] !== 1){
         header("Location:login-form.php");
     }
 
@@ -32,9 +32,9 @@
     // connect to database and select all users
     $database = new Database();
 
-    $db = $database -> connect("phplab4", "root", "asd5693");
+    $db = $database -> connect();
    
-    $users = $database -> select($db ,"phplab4", "users");
+    $users = $database -> select( "User");
     
       
     foreach ($users as $user) {
@@ -42,7 +42,7 @@
       $image = $user->$image;
       
         echo "<tr><td>{$user->id}</td>
-                  <td>{$user->name}</td>
+                  <td>{$user->username}</td>
                   <td>{$user->email}</td>
                   <td>{$user->room}</td>
                   <td><img src={$image} width='50px' height='50px' alt='image'></td>";

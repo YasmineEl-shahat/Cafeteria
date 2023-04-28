@@ -8,7 +8,7 @@
     
     session_start();
    
-    if(empty($_SESSION) || $_SESSION['role'] !== "admin"){
+    if(empty($_SESSION) || $_SESSION['role'] !== 1){
         header("Location:login-form.php");
     }
     
@@ -17,7 +17,7 @@
 
     // connect to database
     $database = new Database();
-    $db = $database -> connect("phplab4", "root", "asd5693");
+    $db = $database -> connect();
 
     if (array_key_exists("old", $_GET)) {
         $old = json_decode($_GET['old']);
@@ -27,7 +27,7 @@
             $errors = (array) $errors;
         }
     } else {
-        $oldValues = $database->select_item($db, "phplab4", "users", $user_id);
+        $oldValues = $database->select_item( "User", $user_id);
         $img = $oldValues["profile-pic"];
         $edit_url.="&imgPath={$img}";
     }

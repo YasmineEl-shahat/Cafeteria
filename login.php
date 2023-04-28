@@ -15,8 +15,8 @@ $email = $_POST["email"];
 $password = $_POST["password"];
 
 $database = new Database();
-$db = $database -> connect("phplab4", "root", "asd5693");
-$user = $database -> select_item_email($db ,"phplab4", "users", $email);
+$db = $database -> connect();
+$user = $database -> select_item_email( "User", $email);
 
 
 if(!$user){
@@ -33,8 +33,8 @@ else if($user['password'] !== $password){
 }
 else {
     session_start();
-    $_SESSION["username"]=$user['name'];
-    $_SESSION["role"]=$user['role'];
+    $_SESSION["username"]=$user['username'];
+    $_SESSION["role"]=$user['is_admin'];
     header("Location:homepage.php");
 }
 

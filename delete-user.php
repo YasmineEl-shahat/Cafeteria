@@ -12,7 +12,7 @@
 
     session_start();
    
-    if(empty($_SESSION) || $_SESSION['role'] !== "admin"){
+    if(empty($_SESSION) || $_SESSION['role'] !== 1){
         header("Location:login-form.php");
     }
 
@@ -21,10 +21,10 @@
     ############################# Delete
 
     $database = new Database();
-    $db = $database -> connect("phplab4", "root", "asd5693");
-    $imagePath = $database->select_item($db ,"phplab4", "users", $user_id)["profile-pic"];
+    $db = $database -> connect();
+    $imagePath = $database->select_item( "User", $user_id)["profile-pic"];
     unlink($imagePath);
-    $database -> delete($db ,"phplab4", "users", $user_id);
+    $database -> delete( "User", $user_id);
 
     header("Location:users-table.php");
 ?>
