@@ -2,6 +2,7 @@
 include '../layout/navbar.php';
 // include '../layout/home-slider.php';
 include "../../models/product.php";
+include "../../models/category.php";
 include "../../guard/adminAuth.php";
 adminAuth("../auth/login-form.php");
 
@@ -14,9 +15,11 @@ adminAuth("../auth/login-form.php");
             <table class="table table-bordered">
                 <thead>
                     <tr>
+                        <th>ID</th>
                         <th>Product </th>
                         <th>Price</th>
                         <th>Image</th>
+                        <th>Category</th>
                         <th col='3'>Actions</th>
                     </tr>
                 </thead>
@@ -28,11 +31,15 @@ adminAuth("../auth/login-form.php");
                     
                       
                     foreach ($products as $product) {
+                        $categoryId = $product->category_id;
+                        $category = new Category();
+                        $categoryName = $category->selectCategoryNameById($categoryId);
+
                         echo "<tr><td>{$product->id}</td>
                                   <td>{$product->name}</td>
                                   <td>{$product->price}</td>
                                   <td><img src={$product->image} width='50px' height='50px' alt='image'></td>
-                                  <td>{$product->category}</td>";
+                                  <td>{$categoryName}</td>";
                    
                         $edit_url="edit-form.php?id={$product->id}";
                         echo "<td> <a href='"."{$edit_url}". "' class='btn btn-info'> Edit</a> </td>";
