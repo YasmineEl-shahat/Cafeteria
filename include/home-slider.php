@@ -1,5 +1,5 @@
 <section class="home-slider owl-carousel">
-  <div class="slider-item" style="background-image: url(assests/images/bg_1.jpg);">
+  <div class="slider-item" style="background-image: url(assets/images/bg_1.jpg);">
     <div class="overlay"></div>
     <div class="container">
       <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
@@ -15,7 +15,7 @@
     </div>
   </div>
 
-  <div class="slider-item" style="background-image: url(assests/images/bg_2.jpg);">
+  <div class="slider-item" style="background-image: url(assets/images/bg_2.jpg);">
     <div class="overlay"></div>
     <div class="container">
       <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
@@ -31,7 +31,7 @@
     </div>
   </div>
 
-  <div class="slider-item" style="background-image: url(assests/images/bg_3.jpg);">
+  <div class="slider-item" style="background-image: url(assets/images/bg_3.jpg);">
     <div class="overlay"></div>
     <div class="container">
       <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
