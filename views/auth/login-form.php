@@ -5,7 +5,7 @@
 
     session_start();
     if(!empty($_SESSION)){
-    header("Location:views/homepage.php");
+    header("Location:../home");
     }
 
     if($_GET){ 

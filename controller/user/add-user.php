@@ -6,13 +6,10 @@
     include '../../validation/validation.php';
     include '../../models/user.php';
 
-    
-    session_start();
+    include "../../guard/adminAuth.php";
    
-    if(empty($_SESSION) || $_SESSION['role'] !== 1){
-        header("Location:../../views/auth/login-form.php");
-    }
-    
+    adminAuth("../../views/auth/login-form.php");
+   
     // call validation and extract needed data
     $validations = validate();
     $formerrors = $validations["errors"];

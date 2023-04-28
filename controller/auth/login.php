@@ -35,7 +35,7 @@ else {
     session_start();
     $_SESSION["username"]=$user['username'];
     $_SESSION["role"]=$user['is_admin'];
-    header("Location:../../views/homepage.php");
+    header("Location:../../views/home");
 }
 
 
