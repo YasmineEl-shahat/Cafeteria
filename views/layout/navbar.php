@@ -1,3 +1,7 @@
+<?php 
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,6 +32,27 @@
   <link rel="stylesheet" href="../../assets/css/flaticon.css">
   <link rel="stylesheet" href="../../assets/css/icomoon.css">
   <link rel="stylesheet" href="../../assets/css/style.css">
+  <!-- Font Awesome CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <style>
+  /* Hide all nested tables by default */
+  .nested-table {
+    display: none;
+  }
+
+  /* Show a nested table when it has the "nested-table-visible" class */
+  .nested-table-visible {
+    display: table;
+  }
+
+  /* Style the icons */
+  .fas {
+    cursor: pointer;
+  }
+
+</style>
+
 </head>
 
 <body>
@@ -55,6 +80,12 @@
           </li>
           <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
           <li class="nav-item cart"><a href="cart.html" class="nav-link"><span class="icon icon-shopping_cart"></span><span class="bag d-flex justify-content-center align-items-center"><small>1</small></span></a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php echo $_SESSION['username']; ?></a>
+            <div class="dropdown-menu" aria-labelledby="dropdown04">
+              <a class="dropdown-item" href="../../controller/auth/logout.php" >Logout</a>
+            </div>
+          </li>
         </ul>
       </div>
     </div>

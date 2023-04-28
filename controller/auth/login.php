@@ -33,6 +33,7 @@ else if($user['password'] !== $password){
 }
 else {
     session_start();
+    $_SESSION["user_id"] = $user['id'];
     $_SESSION["username"]=$user['username'];
     $_SESSION["role"]=$user['is_admin'];
     header("Location:../../views/home");
