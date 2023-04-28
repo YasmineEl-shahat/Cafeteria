@@ -31,24 +31,24 @@
     else {
         // uploading image
         if($profile_name != ""){
-            $imagespath = $_GET["imgPath"];
-            if(file_exists( $imagePath))  unlink($imagespath);
+            $imagePath = $_GET["imgPath"];
+            if(file_exists( $imagePath))  unlink($imagePath);
             sys_get_temp_dir();
             move_uploaded_file($profile_tmp,"../../assets/images/users/{$profile_name}");
-            $imagespath = "../../assets/images/users/{$profile_name}";
+            $imagePath = "../../assets/images/users/{$profile_name}";
         }
 
         // update data 
         try {
             // connect to database 
-            $database = new Database();
+            $user = new User();
             $id = $_GET['id'];
             
-            if($imagespath)        
-                $database -> update("User", $id,"username", "email","password", "room", "`profile-pic`",
-                $_POST['username'], $_POST['email'], $_POST['password'],$_POST['room'], $imagespath);
+            if($imagePath)        
+                $user -> update_user($id,"username", "email","password", "room", "`profile-pic`",
+                $_POST['username'], $_POST['email'], $_POST['password'],$_POST['room'], $imagePath);
             else 
-                $database -> update( "users", $id,"username", "email","password", "room", 
+                $user -> update_user($id,"username", "email","password", "room", 
                 $_POST['username'], $_POST['email'], $_POST['password'],$_POST['room']);
            
             header("Location:../../views/user/users-table.php");

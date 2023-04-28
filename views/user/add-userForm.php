@@ -5,7 +5,7 @@
 
   session_start();
   if(empty($_SESSION) || $_SESSION['role'] !== 1){
-    header("Location:login-form.php");
+    header("Location:../auth/login-form.php");
   }
   
   if($_GET){ 
@@ -26,7 +26,7 @@
 <body>
 <div class="container">
     <h1> Add new User</h1>
-    <form method="post" action="add-user.php" enctype="multipart/form-data">
+    <form method="post" action="../../controller/user/add-user.php" enctype="multipart/form-data">
          <div class="mb-3">
             <label for="exampleInputName" class="form-label">Name</label>
             <input type="text" class="form-control"
