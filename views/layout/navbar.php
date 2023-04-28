@@ -28,6 +28,27 @@
   <link rel="stylesheet" href="../../assets/css/flaticon.css">
   <link rel="stylesheet" href="../../assets/css/icomoon.css">
   <link rel="stylesheet" href="../../assets/css/style.css">
+  <!-- Font Awesome CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <style>
+  /* Hide all nested tables by default */
+  .nested-table {
+    display: none;
+  }
+
+  /* Show a nested table when it has the "nested-table-visible" class */
+  .nested-table-visible {
+    display: table;
+  }
+
+  /* Style the icons */
+  .fas {
+    cursor: pointer;
+  }
+
+</style>
+
 </head>
 
 <body>
