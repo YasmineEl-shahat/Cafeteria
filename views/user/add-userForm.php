@@ -30,9 +30,9 @@
          <div class="mb-3">
             <label for="exampleInputName" class="form-label">Name</label>
             <input type="text" class="form-control"
-             name='name' id="exampleInputName" 
-             value="<?php echo $oldValues['name'] ?? "" ?>">
-            <div class="text-danger"> <?php  if(isset($errors['name']))  echo $errors['name']; ?></div>
+             name='username' id="exampleInputName" 
+             value="<?php echo $oldValues['username'] ?? "" ?>">
+            <div class="text-danger"> <?php  if(isset($errors['username']))  echo $errors['username']; ?></div>
         </div>
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Email</label>

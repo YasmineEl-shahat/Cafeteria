@@ -2,11 +2,12 @@
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
+
     session_start();
     if(!empty($_SESSION)){
-    echo  ' You are already logged in ';
-    header("Location:homepage.php");
+    header("Location:views/homepage.php");
     }
+
     if($_GET){ 
         $error = json_decode($_GET['error']);
     }
@@ -21,7 +22,7 @@
 </head>
 <body>
 <div class="container">
-    <form method="post" action="login.php">
+    <form method="post" action="../../controller/auth/login.php">
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Email address</label>
             <input type="email" class="form-control"

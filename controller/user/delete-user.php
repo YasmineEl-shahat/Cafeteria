@@ -21,9 +21,8 @@
     ############################# Delete
 
     $database = new Database();
-    $db = $database -> connect();
     $imagePath = $database->select_item( "User", $user_id)["profile-pic"];
-    unlink($imagePath);
+    if(file_exists( $imagePath)) unlink($imagePath);
     $database -> delete( "User", $user_id);
 
     header("Location:users-table.php");

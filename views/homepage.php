@@ -17,10 +17,9 @@ session_start();
 if(!empty($_SESSION)){
     echo "<h1> Welcome {$_SESSION['username']} </h1>";
 }else{
-    header("Location:login-form.php");
+    header("Location:auth/login-form.php");
 }
 
-echo '<a href="logout.php" class="btn btn-danger">Logout </a>';
-
+echo '<a href="../controller/auth/logout.php" class="btn btn-danger">Logout </a>';
 ?>
 

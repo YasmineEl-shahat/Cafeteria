@@ -6,13 +6,13 @@
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
    
-    include 'Database/Database.php';
+   include "../../models/user.php";
 
    
     session_start();
    
     if(empty($_SESSION) || $_SESSION['role'] !== 1){
-        header("Location:login-form.php");
+        header("Location:../auth/login-form.php");
     }
 
     echo "<div class='container' >  ";
@@ -30,11 +30,9 @@
 
 
     // connect to database and select all users
-    $database = new Database();
-
-    $db = $database -> connect();
+    $user = new User();
    
-    $users = $database -> select( "User");
+    $users = $user -> selectUsers();
     
       
     foreach ($users as $user) {
@@ -50,7 +48,7 @@
         $edit_url="edit-form.php?id={$user->id}";
         echo "<td> <a href='"."{$edit_url}". "' class='btn btn-info'> Edit</a> </td>";
         
-        $delete_url="delete-user.php?id={$user->id}";
+        $delete_url="../../controller/user/delete-user.php?id={$user->id}";
         echo "<td> <a href='"."{$delete_url}". "' class='btn btn-danger'> Delete</a> </td>";
         
         echo "</tr>";

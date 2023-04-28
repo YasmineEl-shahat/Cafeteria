@@ -33,13 +33,12 @@
     else {
         // uploading image
         sys_get_temp_dir();
-        move_uploaded_file($profile_tmp,"images/users/{$profile_name}");
-        $imagespath = "images/users/{$profile_name}";
+        move_uploaded_file($profile_tmp,"assets/images/users/{$profile_name}");
+        $imagespath = "assets/images/users/{$profile_name}";
         // save data 
         $database = new Database();
-        $db = $database -> connect();
-        $database -> insert( "User", "username", "email","password", "room", "`profile-pic`", "isAdmin",
-                    $_POST['name'], $_POST['email'], $_POST['password'],$_POST['room'], $imagespath, "user");
+        $database -> insert( "User", "username", "email","password", "room", "`profile-pic`", "is_admin",
+                    $_POST['username'], $_POST['email'], $_POST['password'],$_POST['room'], $imagespath, 0);
         header("Location:users-table.php");
     }
 ?>

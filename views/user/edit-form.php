@@ -3,21 +3,21 @@
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
 
-    include 'Database/Database.php';
+      include "../../models/user.php";
 
     
     session_start();
    
     if(empty($_SESSION) || $_SESSION['role'] !== 1){
-        header("Location:login-form.php");
+        header("Location:../auth/login-form.php");
     }
     
     $user_id = $_GET['id'];
-    $edit_url="edit-user.php?id={$user_id}";
+    $edit_url="../../controller/user/edit-user.php?id={$user_id}";
 
     // connect to database
-    $database = new Database();
-    $db = $database -> connect();
+    $user = new User();
+
 
     if (array_key_exists("old", $_GET)) {
         $old = json_decode($_GET['old']);
@@ -27,7 +27,7 @@
             $errors = (array) $errors;
         }
     } else {
-        $oldValues = $database->select_item( "User", $user_id);
+        $oldValues = $user->select_user( $user_id);
         $img = $oldValues["profile-pic"];
         $edit_url.="&imgPath={$img}";
     }
@@ -48,9 +48,9 @@
          <div class="mb-3">
             <label for="exampleInputName" class="form-label">Name</label>
             <input type="text" class="form-control"
-             name='name' id="exampleInputName" 
-             value="<?php echo $oldValues['name'] ?? "" ?>">
-            <div class="text-danger"> <?php  if (isset($errors['name'])) {
+             name='username' id="exampleInputName" 
+             value="<?php echo $oldValues['username'] ?? "" ?>">
+            <div class="text-danger"> <?php  if (isset($errors['username'])) {
                 echo $errors['name'];
             } ?></div>
         </div>

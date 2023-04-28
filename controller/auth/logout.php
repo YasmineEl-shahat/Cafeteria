@@ -14,6 +14,6 @@ if(isset($_SESSION)){
     $_SESSION = array();
     session_destroy();
     setcookie('PHPSESSID', '', time()-3600, '/', '', 0);
-    header("Location:login-form.php");
+    header("Location:../../views/auth/login-form.php");
 }
 ?>
