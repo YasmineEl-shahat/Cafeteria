@@ -33,8 +33,8 @@
     else {
         // uploading image
         sys_get_temp_dir();
-        move_uploaded_file($profile_tmp,"images/{$profile_name}");
-        $imagespath = "images/{$profile_name}";
+        move_uploaded_file($profile_tmp,"images/users/{$profile_name}");
+        $imagespath = "images/users/{$profile_name}";
         // save data 
         $database = new Database();
         $db = $database -> connect();

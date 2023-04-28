@@ -33,8 +33,8 @@
             $imagespath = $_GET["imgPath"];
             unlink($imagespath);
             sys_get_temp_dir();
-            move_uploaded_file($profile_tmp,"images/{$profile_name}");
-            $imagespath = "images/{$profile_name}";
+            move_uploaded_file($profile_tmp,"images/users/{$profile_name}");
+            $imagespath = "images/users/{$profile_name}";
         }
 
         // update data 
