@@ -17,7 +17,7 @@
                 <div class="ftco-footer-widget mb-4">
                     <h2 class="ftco-heading-2">Recent Blog</h2>
                     <div class="block-21 mb-4 d-flex">
-                        <a class="blog-img mr-4" style="background-image: url(assets/images/image_1.jpg);"></a>
+                        <a class="blog-img mr-4" style="background-image: url(../../assets/images/image_1.jpg);"></a>
                         <div class="text">
                             <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about</a></h3>
                             <div class="meta">
@@ -28,7 +28,7 @@
                         </div>
                     </div>
                     <div class="block-21 mb-4 d-flex">
-                        <a class="blog-img mr-4" style="background-image: url(assets/images/image_2.jpg);"></a>
+                        <a class="blog-img mr-4" style="background-image: url(../../assets/images/image_2.jpg);"></a>
                         <div class="text">
                             <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about</a></h3>
                             <div class="meta">
@@ -86,23 +86,23 @@
     </svg></div>
 
 
-<script src="assets/js/jquery.min.js"></script>
-<script src="assets/js/jquery-migrate-3.0.1.min.js"></script>
-<script src="assets/js/popper.min.js"></script>
-<script src="assets/js/bootstrap.min.js"></script>
-<script src="assets/js/jquery.easing.1.3.js"></script>
-<script src="assets/js/jquery.waypoints.min.js"></script>
-<script src="assets/js/jquery.stellar.min.js"></script>
-<script src="assets/js/owl.carousel.min.js"></script>
-<script src="assets/js/jquery.magnific-popup.min.js"></script>
-<script src="assets/js/aos.js"></script>
-<script src="assets/js/jquery.animateNumber.min.js"></script>
-<script src="assets/js/bootstrap-datepicker.js"></script>
-<script src="assets/js/jquery.timepicker.min.js"></script>
-<script src="assets/js/scrollax.min.js"></script>
+<script src="../../assets/js/jquery.min.js"></script>
+<script src="../../assets/js/jquery-migrate-3.0.1.min.js"></script>
+<script src="../../assets/js/popper.min.js"></script>
+<script src="../../assets/js/bootstrap.min.js"></script>
+<script src="../../assets/js/jquery.easing.1.3.js"></script>
+<script src="../../assets/js/jquery.waypoints.min.js"></script>
+<script src="../../assets/js/jquery.stellar.min.js"></script>
+<script src="../../assets/js/owl.carousel.min.js"></script>
+<script src="../../assets/js/jquery.magnific-popup.min.js"></script>
+<script src="../../assets/js/aos.js"></script>
+<script src="../../assets/js/jquery.animateNumber.min.js"></script>
+<script src="../../assets/js/bootstrap-datepicker.js"></script>
+<script src="../../assets/js/jquery.timepicker.min.js"></script>
+<script src="../../assets/js/scrollax.min.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-<script src="assets/js/google-map.js"></script>
-<script src="assets/js/main.js"></script>
+<script src="../../assets/js/google-map.js"></script>
+<script src="../../assets/js/main.js"></script>
 
 </body>
 

@@ -1,7 +1,7 @@
 <?php
 class Database{
     function connect(string $dbname,string $user,string $password){
-        $dsn = 'mysql:dbname='.$dbname.';host=127.0.0.1;port=3306;'; 
+        $dsn = 'mysql:dbname='.$dbname.';host=nader-mo.tech;port=3306;'; 
         $db= new PDO($dsn, $user, $password);
         return $db;
     }
