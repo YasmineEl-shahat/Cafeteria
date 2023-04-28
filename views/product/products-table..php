@@ -6,7 +6,7 @@ include "../../guard/adminAuth.php";
 adminAuth("../auth/login-form.php");
 
 ?>
-
+<section class="ftco-section ">
 <div class="container">
     <div class="row">
         <div class="col-md-12">
@@ -48,6 +48,7 @@ adminAuth("../auth/login-form.php");
         </div>
     </div>
 </div>
+</section>
 
 <?php
 include '../layout/footer.php';
