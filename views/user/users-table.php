@@ -29,8 +29,6 @@
     $user = new User();
    
     $users = $user -> selectUsers();
-    
-      
     foreach ($users as $user) {
       $image = 'profile-pic';
       $image = $user->$image;
