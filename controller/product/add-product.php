@@ -37,7 +37,9 @@
         $product = new Product();
         $categoryName = $_POST['category'];
         $category = new Category();
+        var_dump($categoryName);
         $categoryId = $category->selectCategoryIdByName($categoryName);
+        var_dump($categoryId);
 
         $product->insertProduct("name", "price", "image", "category_id",
             $_POST['name'], $_POST['price'], $imagespath, $categoryId);

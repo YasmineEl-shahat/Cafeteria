@@ -1,7 +1,4 @@
 <?php
-  ini_set('display_errors', 1);
-  ini_set('display_startup_errors', 1);
-  error_reporting(E_ALL);
 include '../layout/navbar.php';
 include "../../models/category.php";
 include "../../guard/adminAuth.php";
@@ -25,18 +22,18 @@ include "../../guard/adminAuth.php";
 	                  <input type="number" class="form-control" placeholder="Product Price" name='price'>
 	                </div>
                   <div class="form-group">
-	                  <input type="number" class="form-control" placeholder="Product Price" name='available'>
+	                  <input type="text" class="form-control" placeholder="unavailable" name='available'>
 	                </div>
                     <div class="form-group">
                     <label for="category">Product Category</label>
-                    <select id="category" name="category" class="form-control" name='category'>
+                    <select id="category" name="category" class="form-control" name='category[]'>
+                    <?php
+                        $category = new Category();
+                        $categories = $category->selectCategories();?>
                         <?php
-                            $category = new Category();
-                            $categories = $category->selectCategories();
-                            foreach ($categories as $category) {
-                                echo "<option value='{$category->id}' style='background-color:gray'>{$category->name}</option>";
-                            }
-                        ?>
+                        foreach ($categories as $category) { ?>
+                            <option value="<?php echo $category->name ?>" style="background-color:gray"><?php echo $category->name ?></option>
+                    <?php } ?>
                     </select>
                 </div>
                <div class="form-group">

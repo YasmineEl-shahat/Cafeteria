@@ -24,19 +24,28 @@ class Category extends Database {
     public function delete_Category(int $id) {
         parent::delete("Category", $id);
     }
-    public function selectCategoryIdByName($name) {
+    public function selectCategoryIdByName(string $name) {
         $sql = "SELECT id FROM Category WHERE name = ?";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$name]);
-        $result = $stmt->fetch(PDO::FETCH_OBJ);
-        return $result->id;
+        $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+        var_dump($result);
+        if (count($result) > 0) {
+            return $result[0]->id;
+        } else {
+            return null;
+        }
     }
     public function selectCategoryNameById($id) {
         $sql = "SELECT name FROM Category WHERE id = ?";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$id]);
-        $result = $stmt->fetch(PDO::FETCH_OBJ);
-        return $result->name;
+        $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+        if (count($result) > 0) {
+            return $result[0]->name;
+        } else {
+            return null;
+        }
     }
 
 }
