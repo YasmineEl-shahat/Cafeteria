@@ -11,24 +11,23 @@
    
     adminAuth("../../views/auth/login-form.php");
    
-    // call validation and extract needed data
-    // $validations = validate();
-    // $formerrors = $validations["errors"];
-    // $oldvalues = $validations["formvalues"];
+    $errors = [];
+    $formvalues = [];
+    $id=$_GET['id'];
+    foreach ($_POST as $k=>$value){
+        if(!isset($k) or empty($value))
+            $errors[$k] = $k." is required";
+        else $formvalues[$k] = $value;    
+    }
+
+    if(count($errors) > 0){
+        $errors = json_encode($errors);
+        $redirect_url= "../../views/product/add-productForm.php?errors=$errors&formvalues=$formvalues";
+        header("Location: $redirect_url");
+        exit();
+    }
     $product_image= $_FILES['product_image']['name'];
     $product_tmp = $_FILES['product_image']['tmp_name'];
-    
-    
-    // redirect to add form with errors and old data
-    // if($formerrors !== "[]"){
-    //     $redirect_url = "Location:../../views/user/add-userForm.php?errors={$formerrors}";
-    //     if ($oldvalues !== "[]"){
-    //         $oldvalues = json_encode($oldvalues);
-    //         $redirect_url .="&old={$oldvalues}";
-    //     }
-    //     header($redirect_url);
-    // }
-    // else {
         // uploading image
         sys_get_temp_dir();
         move_uploaded_file($product_tmp,"../../assets/images/products/{$product_image}");
@@ -37,7 +36,9 @@
         $product = new Product();
         $categoryName = $_POST['category'];
         $category = new Category();
+        var_dump($categoryName);
         $categoryId = $category->selectCategoryIdByName($categoryName);
+        var_dump($categoryId);
 
         $product->insertProduct("name", "price", "image", "category_id",
             $_POST['name'], $_POST['price'], $imagespath, $categoryId);

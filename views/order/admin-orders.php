@@ -17,21 +17,7 @@ if ($_GET) {
 } else $oldValues = [];
 include '../../models/order.php';
 $db = new Order();
-echo '<script>';
-echo 'function markOrderAsDone(orderId) {';
-echo '    var xhr = new XMLHttpRequest();';
-echo '    xhr.open("POST", "mark_order_as_done.php", true);';
-echo '    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");';
-echo '    xhr.onreadystatechange = function() {';
-echo '        if (xhr.readyState === 4 && xhr.status === 200) {';
-echo '            // reload the page';
-echo '            window.location.reload();';
-echo '        }';
-echo '    };';
-echo '    xhr.send("orderId=" + orderId);';
-echo '}';
-echo '</script>';
-  
+
 ?>
 
 <!-- cdn fontAwesome v 6.4.0  -->
@@ -59,18 +45,20 @@ echo '</script>';
                             echo '<td style="vertical-align:top;">' . $order->date_created . '</td>';
                             echo '<td style="vertical-align:top;">' . $order->room . '</td>';
                             echo '<td style="vertical-align:top;">' . $order->status . '</td>';
-                            // echo '<td><a href="'.header('Location: ' . $_SERVER['REQUEST_URI']).'" onclick="' . $db->mark_order_as_done($order->id) . '" >'.$order->id.'</a></td>';
-                            echo '<td><a href="#" onclick="markOrderAsDone('.$order->id.'); return false;">'.$order->id.'</a></td>';
+
+                            $url = "../../controller/edit-status.php?status={$order->status}&id={$order->id}";
+                            if ($order->status == 'done') {
+                                echo "<td style='color:#fff'> Done </td>";
+                            } else {
+                                echo "<td> <a href='" . "{$url}" . "'>Next</a> </td>";
+                            }
 
                             $items = $db->get_order_items($order->id);
-                            echo '</tr>';
-
-                            echo '<tr>
+                            echo '</tr>
+                            <tr>
                                 <th>Order Items</th>
                             </tr>
                             <tr>';
-
-
                             foreach ($items as $item) {
                                 echo '<td>
                                  <img class="img" style="width:150px; height:150px;" src="' . $item->image . '"></img>
