@@ -26,40 +26,34 @@ class Order extends Database {
     }
 
     public function get_users_orders(){
-        $query = "SELECT Order.id, Order.status, User.username as client, User.room
+        $query = "SELECT Order.id as id, Order.status as status, User.username as client, User.room as room, Order.date_created 
         FROM User
-        INNER JOIN `Order` ON User.id = `Order`.user_id
-        WHERE `Order`.status = 'proccessig';
-        ";
+        INNER JOIN `Order` ON User.id = `Order`.user_id;
+        WHERE `Order`.status = 'outForDelivery'";
+        //  -- WHERE `Order`.status = 'proccessig'
         $stmt = $this->db->prepare($query);
         $stmt->execute();
         $data = $stmt->fetchAll(PDO::FETCH_OBJ);
         return $data;
     }
     public function get_order_items(string $id){
-        $query = "SELECT *
-        FROM Order_Item
-        WHERE order_id = :id;
+        $query = "SELECT Product.name, Product.image, Order_Item.quantity
+        FROM Product
+        INNER JOIN Order_Item ON Product.id = Order_Item.product_id
+        INNER JOIN `Order` ON Order_Item.order_id = `Order`.id
+        WHERE `Order`.id = ?;
+        
         ";
         $stmt = $this->db->prepare($query);
-        $res = $stmt->execute();
-        $stmt->bindParam(':id', $id, PDO::PARAM_STR);
-        $data = $stmt->fetch(PDO::FETCH_ASSOC);
+        $res = $stmt->execute([$id]);
+        $data = $stmt->fetchAll(PDO::FETCH_OBJ);
         return $data;
     }
+    function mark_order_as_done($orderId) {
+        $query = "UPDATE `Order` SET status = 'done' WHERE id = ?";
+        $stmt = $this->db->prepare($query);
+        $res = $stmt->execute([$orderId]);
+        return $res;
+    }
+
 }
-
-
-// INSERT INTO Product (name, price, category_id, date_created,image) VALUES
-//   ('Coffee', 1.99, 3, NOW(),'../../assets/images/products/menu-1.jpg'),
-//   ('Tea', 1.49, 3, NOW(),'../../assets/images/products/menu-2.jpg'),
-//   ('Iced Tea', 2.49, 4, NOW(),'../../assets/images/products/drink-8.jpg'),
-//   ('Orange Juice', 3.99, 4, NOW(),'../../assets/images/products/drink-1.jpg'),
-//   ('Bagel with Cream Cheese', 2.99, 5, NOW(),'../../assets/images/products/drink-9.jpg'),
-//   ('Egg Sandwich', 3.99, 5, NOW(),'../../assets/images/products/dish-1.jpg'),
-//   ('BLT Sandwich', 5.99, 6, NOW(),'../../assets/images/products/dish-2.jpg'),
-//   ('Grilled Cheese Sandwich', 4.99, 6, NOW(),'../../assets/images/products/dish-3.jpg'),
-//   ('Garden Salad', 6.99, 7, NOW(),'../../assets/images/products/dish-4.jpg'),
-//   ('Greek Salad', 7.99, 7, NOW(),'../../assets/images/products/dish-5.jpg'),
-//   ('Chocolate Chip Cookie', 1.99, 8, NOW(),'../../assets/images/products/dish-6.jpg'),
-//   ('Brownie', 2.49, 8, NOW(),'../../assets/images/products/dish-7.jpg');

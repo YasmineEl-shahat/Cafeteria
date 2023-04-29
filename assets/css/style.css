@@ -9281,3 +9281,6 @@ textarea.form-control {
   100% {
     stroke-dasharray: 89, 200;
     stroke-dashoffset: -136px; } }
+.table-order tr td, .table-order tr th {
+  border: 1px solid #dee2e6;
+}

@@ -15,6 +15,12 @@ if ($_GET) {
     $errors = (array) $errors;
     $oldValues = (array) $old;
 } else $oldValues = [];
+include '../../models/order.php';
+$db = new Order();
+// function markOrderAsDone($orderId) {
+//     $db = new Order();
+//     $db->mark_order_as_done($orderId);
+// }   
 ?>
 
 <!-- cdn fontAwesome v 6.4.0  -->
@@ -23,68 +29,56 @@ if ($_GET) {
         <div class="row">
             <div class="col-md-12">
                 <h1>Orders</h1>
-                <table class="table table-bordered">
+                <table class="table table-order">
                     <thead>
                         <tr>
-                            <th>Order ID</th>
+                            <th style="border: 1px solid #dee2e6;">Order Client</th>
                             <th>Order Date</th>
+                            <th>Order Room</th>
                             <th>Order Status</th>
-                            <th>Order Client</th>
-                            <th>Order Items</th>
+                            <th>Done</th>
+                            <!-- <th>Order Items</th> -->
                         </tr>
                     </thead>
                     <tbody>
                         <?php
                         // include '../../models/order.php';
-                        include '../../models/order.php';
-                        $db = new Order();
-                        // $con = $db->connect('cafeteria', 'php_nabila', 'Aa123456');
+                        // $db = new Order();
                         $orders = $db->get_users_orders();
-                        var_dump($orders);
-                        // $con = $db->connect('cafeteria', 'php_nabila', 'Aa123456');
-                        // $orders = $db->select($con, 'cafeteria', 'order')->where('status', '==', 'proccessig')->get();
                         foreach ($orders as $order) {
-                        echo '<tr>';
-                        echo '<td style="vertical-align:top;>' . $order->id . '</td>';
-                        echo '<td style="vertical-align:top;>' . $order->date_created . '</td>';
-                        echo '<td style="vertical-align:top;>' . $order->status . '</td>';
-                        echo '<td style="vertical-align:top;>' . $order->room . '</td>';
+                            echo '<tr>';
+                            echo '<td style="vertical-align:top;">' . $order->client . '</td>';
+                            echo '<td style="vertical-align:top;">' . $order->date_created . '</td>';
+                            echo '<td style="vertical-align:top;">' . $order->room . '</td>';
+                            echo '<td style="vertical-align:top;">' . $order->status . '</td>';
+                            // echo '<td><a href="#" onclick="' . $db->mark_order_as_done($order->id) . '" value="HIIIIII""></a></td>';
+                            // $delete_url = "../../models/order.php";
+                            // echo "<td> <a href='" . "{$delete_url}" . "' class='btn btn-danger'> Delete </a></td>";
 
-                        echo '<td> <table><tr>';
+                            $items = $db->get_order_items($order->id);
+                            echo '</tr>';
 
-                        $items = $db->get_order_items($order->id);
-                        foreach ($items as $item) {
-                        // echo '<td>' .
-
-                        // $product->name . ' - ' .
-                        // $item->quantity . ' - ' .
-                        // '</td>';../../assets/images/menu-1.jpg
-                        echo '<td style="padding-top:0px; border:0">
-                            
-                                    <img class="img" style=" width:150px; height:150px;" src="'. $item->image.'"></img>
-                                    <div class="text text-center pt-4">
-                                        <h4>'. $item->name.'</h3>
-                                        <p class="price">Quantity: <span>'. $item->quantity.'</span></p>
-                                       </div>
+                            echo '<tr>';
+                            foreach ($items as $item) {
+                                echo '<td>
+                                <img class="img" style="width:150px; height:150px;" src="' . $item->image . '"></img>
+                                <div class="text text-center pt-4">
+                                    <h4>' . $item->name . '</h4>
+                                    <p class="price">Quantity: <span>' . $item->quantity . '</span></p>
+                                </div>
                                 </td>';
-                        // echo '<td style="padding-top:0px;">
-                                
-                        //                 <img class="img" style=" width:150px; height:150px;" src="../../assets/images/menu-1.jpg"></a>
-                        //                 <div class="text text-center pt-4">
-                        //                     <h4>Coffee Capuccino</h3>
-                        //                     <p class="price">Quantity: <span>5</span></p>
-                        //                    </div>
-                        //             </td>';
-                        
-                        }
-                        echo '</tr></table></td>';
-                        // echo '<td><a href="order-details.php?id=' . $order->id . '">Done</a></td>';
-                        echo '</tr>';
+                            }
+                            echo '</tr>';
                         }
                         ?>
                     </tbody>
                 </table>
+
             </div>
         </div>
     </div>
 </section>
+<script>
+    // Redirect to a new location
+    window.location.href = "http://example.com/new-location.php";
+</script>
