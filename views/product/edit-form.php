@@ -28,9 +28,11 @@
 	                <div class="form-group">
 	                  <input type="number" class="form-control" value='<?php echo $product['price']; ?>' name='price'>
 	                </div>
+                    <div class="text-danger"> <?php  if(isset($errors['price']))  echo $errors['price']; ?></div>
                   <div class="form-group">
 	                  <input type="text" class="form-control"value='<?php echo $product['availability']; ?>' name='availability'>
 	                </div>
+                    <div class="text-danger"> <?php  if(isset($errors['availability']))  echo $errors['availability']; ?></div>
                     <div class="form-group">
                     <label for="category">Product Category</label>
                     <select id="category" name="category" class="form-control" name='category[]'>

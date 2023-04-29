@@ -55,6 +55,12 @@ adminAuth("../auth/login-form.php");
         </div>
     </div>
 </div>
+<input type="button" value="Add Product " class="btn btn-primary py-3 px-5" onclick="redirectToNewPage()">
+<script>
+    function redirectToNewPage() {
+      window.location.href = "./add-productForm.php";
+    }
+  </script>
 </section>
 
 <?php

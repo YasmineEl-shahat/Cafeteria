@@ -1,4 +1,3 @@
-<!-- write functio that validate form values -->
 <?php
 function validate(){
     # validate data 

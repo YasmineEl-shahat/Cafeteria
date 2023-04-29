@@ -7,15 +7,18 @@
     adminAuth("../../views/auth/login-form.php");
     $errors = [];
     $formvalues = [];
+    $id=$_GET['id'];
     foreach ($_POST as $k=>$value){
         if(!isset($k) or empty($value))
             $errors[$k] = $k." is required";
         else $formvalues[$k] = $value;    
     }
 
-    if($errors){
-        $redirect_url= "../../views/product/edit-productForm.php?errors={$formvalues}";
+    if(count($errors) > 0){
+        $errors = json_encode($errors);
+        $redirect_url= "../../views/product/edit-form.php?errors={$errors}&id={$id}";
         header("Location: $redirect_url");
+        exit();
     }
     $product_image= $_FILES['product_image']['name'];
     $product_tmp = $_FILES['product_image']['tmp_name'];
