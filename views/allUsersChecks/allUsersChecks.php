@@ -1,5 +1,8 @@
 <?php
 include '../layout/navbar.php';
+include '../../models/Order.php';
+$order= new Order();
+var_dump($order->allUsersOrders());
 ?>
 <section class="ftco-section ">
     <div class="container mt-5">
