@@ -13,6 +13,7 @@ include "../../guard/adminAuth.php";
 ?>
 <section class="ftco-section ">
 <div class="container">
+  <h4 class="text-center">Add Product</h4>
     <div class="col-md-6 ">
             <form method="post" action="../../controller/product/add-product.php" enctype="multipart/form-data" class="contact-form">
 	                <div class="form-group">
