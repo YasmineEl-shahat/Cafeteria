@@ -13,6 +13,13 @@ class Product extends Database {
         return parent::select("Product");
     }
     
+    public function selectProductsCategory($category) {
+        $products = parent::select("Product");
+        $filtered = array_filter($products, function($product) use ($category) {
+            return $product->category_id == $category;
+        });
+        return array_values($filtered);
+    }
     public function select_product(int $id) {
         return parent::select_item("Product", $id);
     }
