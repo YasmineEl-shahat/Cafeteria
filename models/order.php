@@ -49,8 +49,8 @@ class Order extends Database {
         $data = $stmt->fetchAll(PDO::FETCH_OBJ);
         return $data;
     }
-    function mark_order_as_done($orderId) {
-        $query = "UPDATE `Order` SET status = 'done' WHERE id = ?";
+    function mark_order_as_done(int $orderId) {
+        $query = "UPDATE `Order` SET status = 'outForDelivery' WHERE id = ?";
         $stmt = $this->db->prepare($query);
         $res = $stmt->execute([$orderId]);
         return $res;
