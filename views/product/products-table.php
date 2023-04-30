@@ -11,7 +11,7 @@ adminAuth("../auth/login-form.php");
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h1>Orders</h1>
+            <h1>Products</h1>
             <table class="table table-bordered">
                 <thead>
                     <tr>
@@ -40,9 +40,11 @@ adminAuth("../auth/login-form.php");
                                   <td>{$product->price}</td>
                                   <td><img src={$product->image} width='50px' height='50px' alt='image'></td>
                                   <td>{$categoryName}</td>";
-                   
+                        
                         $edit_url="edit-form.php?id={$product->id}";
                         echo "<td> <a href='"."{$edit_url}". "' class='btn btn-info'> Edit</a> </td>";
+                        $edit_url="../../controller/edit-available.php?availaility={$product->availability}&id={$product->id}";
+                        echo "<td> <a href='"."{$edit_url}". "' class='btn btn-success'>{$product->availability}</a> </td>";
                         
                         $delete_url="../../controller/product/delete-product.php?id={$product->id}";
                         echo "<td> <a href='"."{$delete_url}". "' class='btn btn-danger'> Delete</a> </td>";
@@ -55,7 +57,7 @@ adminAuth("../auth/login-form.php");
         </div>
     </div>
 </div>
-<input type="button" value="Add Product " class="btn btn-primary py-3 px-5" onclick="redirectToNewPage()">
+<input type="button" value="Add Product " class="btn btn-primary py-3 px-5 m-auto" onclick="redirectToNewPage()">
 <script>
     function redirectToNewPage() {
       window.location.href = "./add-productForm.php";

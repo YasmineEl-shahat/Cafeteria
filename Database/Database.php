@@ -5,8 +5,6 @@ class Database{
     private function connect(){
         $dsn = 'mysql:dbname=php_nabila;host=nader-mo.tech;port=3306;'; 
         $this->db= new PDO($dsn, 'php_nabila', 'Aa123456');
-        // $dsn = 'mysql:dbname=php_nabila;host=localhost;port=3306;'; 
-        // $this->db= new PDO($dsn, 'root', '');
     }
     
     public function __construct(){

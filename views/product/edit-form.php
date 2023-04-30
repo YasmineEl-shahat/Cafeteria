@@ -19,6 +19,7 @@
     ?>
 <section class="ftco-section ">
 <div class="container">
+  <h4 class="text-center">Edit Product</h4>
     <div class="col-md-6 ">
             <form method="post" action="<?php echo $edit_url; ?>" enctype="multipart/form-data" class="contact-form">
 	                <div class="form-group">

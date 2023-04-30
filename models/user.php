@@ -16,7 +16,16 @@ class User extends Database {
     public function select_user(int $id) {
         return parent::select_item("User", $id);
     }
-    
+
+    public function select_item_email( string $email){
+        $query = "select * from ".$this->dbname.". User where email=:user_email";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':user_email', $email, PDO::PARAM_STR);
+        $res = $stmt->execute();
+        $data = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $data;
+    }
+   
     public function update_user(int $id, ...$args) {
         parent::update("User", $id, ...$args);
     }
@@ -25,16 +34,7 @@ class User extends Database {
         parent::delete("User", $id);
     }
 
-    public function select_item_email( string $email){
-   
-        var_dump($email);
-        $query = "select * from ".$this->dbname.". User where email=:user_email";
-        $stmt = $this->db->prepare($query);
-        $stmt->bindParam(':user_email', $email, PDO::PARAM_STR);
-        $res = $stmt->execute();
-        $data = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $data;
-    }
+ 
 }
 
 
