@@ -52,10 +52,10 @@ class Cart extends Database
     }
     public function get_Cart_items(string $id)
     {
-        $query = "SELECT Product.name, Product.image, Cart_Item.quantity
+        $query = "SELECT Product.name as name, Product.price as price, Product.image as image, Cart_Item.quantity as quantity
         FROM Product
         INNER JOIN Cart_Item ON Product.id = Cart_Item.product_id
-        INNER JOIN `Cart` ON Cart_Item.cart_id = `Cart`.id";
+        INNER JOIN `Cart` ON Cart_Item.cart_id = `Cart`.id where Cart.id=?";
         $stmt = $this->db->prepare($query);
         $res = $stmt->execute([$id]);
         $data = $stmt->fetchAll(PDO::FETCH_OBJ);
