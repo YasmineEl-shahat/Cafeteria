@@ -31,13 +31,21 @@ class Cart extends Database
     {
         parent::delete("Cart", $id);
     }
-
+  
     public function get_users_Carts()
     {
         $query = "SELECT Cart.id as id, User.username as client
         FROM User
         INNER JOIN `Cart` ON User.id = `Cart`.`user_id`";
         $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        $data = $stmt->fetchAll(PDO::FETCH_OBJ);
+        return $data;
+    }
+    public function get_user_Cart_id(int $user_id){
+        $query = 'select id from carts where user_id=:user_id';
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
         $stmt->execute();
         $data = $stmt->fetchAll(PDO::FETCH_OBJ);
         return $data;
@@ -52,5 +60,10 @@ class Cart extends Database
         $res = $stmt->execute([$id]);
         $data = $stmt->fetchAll(PDO::FETCH_OBJ);
         return $data;
+    }
+    public function add_Cart_Item(int $cart_id, int $product_id){
+        parent::insert("Cart_Item",
+        "cart_id","product_id", "quantity",
+         $cart_id, $product_id,  1);
     }
 }
