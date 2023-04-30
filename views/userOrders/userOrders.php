@@ -1,6 +1,6 @@
 <?php
-//include '../layout/navbar.php';
-//include '../../models/Order.php';
+include '../layout/navbar.php';
+include '../../models/Order.php';
 //$order= new Order();
 //var_dump($order->userOrders());
 
