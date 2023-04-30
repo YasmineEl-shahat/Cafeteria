@@ -27,7 +27,9 @@ class Product extends Database {
     public function update_product(int $id, ...$args) {
         parent::update("Product", $id, ...$args);
     }
-    
+    // public function updateAvailability(int $id, string $availability) {
+    //     parent::update("Product", $id, $availability);
+    // }
     public function delete_product(int $id) {
         parent::delete("Product", $id);
     }

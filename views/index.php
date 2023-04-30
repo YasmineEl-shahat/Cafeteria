@@ -2,10 +2,4 @@
     include './layout/navbar.php'; 
     include './layout/home-slider.php';
     
-    ?>
-
-
-
-<?php 
-    include './layout/footer.php';
-?>
+    include './layout/footer.php';?>

@@ -42,20 +42,21 @@ if (isset($_GET['from-date'])&& isset($_GET['to-date']) && $_GET['from-date'] !=
                     <label class="" style="width: 20%;">From Date:</label>
                     <label style="width: 20%;" class="ml-3">To Date:</label>
                 </div>
-                <form class="" method="get" >
+                <form class="" method="get">
 
                     <input type="date" name="from-date" class=" border rounded" style="width: 20%;height:40px">
 
                     <input type="date" name="to-date" class="border rounded ml-3" style="width: 20%;height:40px">
 
-                    <button type="submit" class="border rounded ml-3 text-light" style="width: 15%;height:40px ;background-color:#c49b63">Search</button>
+                    <button type="submit" class="border rounded ml-3 text-light"
+                        style="width: 15%;height:40px ;background-color:#c49b63">Search</button>
                 </form>
                 <div>
                     <table class="table mt-5 p-1 table-bordered">
                         <thead class="thead-primary">
                             <tr>
-                                <th >Order Date</th>
-                                <th >Status</th>
+                                <th>Order Date</th>
+                                <th>Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -80,9 +81,9 @@ if (isset($_GET['from-date'])&& isset($_GET['to-date']) && $_GET['from-date'] !=
                         </tbody>
                     </table>
 
-                   <div id='nested-div' class='nested-table table mt-5 p-1 table-bordered '>
+                    <div id='nested-div' class='nested-table table mt-5 p-1 table-bordered '>
 
-                <?php foreach($orderItems as $order) {
+                        <?php foreach($orderItems as $order) {
 //                   echo "<div id='nested-div-$order->id' class='nested-table table mt-5 p-1 table-bordered '>" ;
 
 
@@ -95,11 +96,11 @@ if (isset($_GET['from-date'])&& isset($_GET['to-date']) && $_GET['from-date'] !=
                         </div> </div>      ";
                      }
                     ?>
-                   </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 </section>
 
