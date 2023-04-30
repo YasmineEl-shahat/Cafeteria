@@ -27,6 +27,10 @@ class Cart extends Database
         parent::update("Cart", $id, ...$args);
     }
 
+    public function update_Cart_Item(int $id, ...$args)
+    {
+        parent::update("Cart_Item", $id, ...$args);
+    }
     public function delete_Cart(int $id)
     {
         parent::delete("Cart", $id);
@@ -65,5 +69,13 @@ class Cart extends Database
         parent::insert("Cart_Item",
         "cart_id","product_id", "quantity",
          $cart_id, $product_id,  1);
+    }
+    public function getTotalPrice(string $id){
+        $query = "select sum(quantity*price) as total from Cart_Item inner join Product 
+        on product_id = Product.id where cart_id = ?";
+        $stmt = $this->db->prepare($query);
+        $res = $stmt->execute([$id]);
+        $data = $stmt->fetchAll(PDO::FETCH_OBJ);
+        return $data;
     }
 }

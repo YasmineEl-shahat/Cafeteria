@@ -15,6 +15,8 @@
     $cart_id = $cart -> get_user_Cart_id($_SESSION["user_id"])[0]->id;
 
     $items = $cart -> get_Cart_items($cart_id);
+    $total = $cart -> getTotalPrice($cart_id)[0]->total;
+ 
 ?>
 
 <section class="ftco-section ftco-cart">
@@ -48,8 +50,11 @@
                                 
                                 <td class="quantity">
                                     <div class="input-group mb-3">
-                                    <input type="text" name="quantity" class="quantity form-control input-number" value="<?php echo $item -> quantity; ?>" min="1" max="100">
-                                </div>
+                                        <form method="post" action="../controller/cartItem/changeQuantity.php?id=<?php echo $item->id; ?>">
+                                            <input type="text" name="quantity" class="quantity form-control input-number" value="<?php echo $item -> quantity; ?>" min="1" max="100">
+                                            <button style="color:white !important;" type="submit" class="btn btn-primary py-3 px-4">UpdateQuantity</button>
+                                        </form>
+                                    </div>
                                 </td>
                                 
                                 <td class="total"><?php echo $item -> price * $item -> quantity; ?></td>
@@ -66,7 +71,7 @@
                     <h3>Cart Totals</h3>
                     <p class="d-flex">
                         <span>Subtotal</span>
-                        <span>$20.60</span>
+                        <span>$<?php echo $total; ?></span>
                     </p>
                     <p class="d-flex">
                         <span>Delivery</span>
@@ -79,7 +84,7 @@
                     <hr>
                     <p class="d-flex total-price">
                         <span>Total</span>
-                        <span>$17.60</span>
+                        <span>$<?php echo $total-3.00; ?></span>
                     </p>
                 </div>
                 <p class="text-center"><a href="checkout.html" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>
