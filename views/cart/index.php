@@ -50,10 +50,11 @@
                                 
                                 <td class="quantity">
                                     <div class="input-group mb-3">
-                                        <form method="post" action="../controller/cartItem/changeQuantity.php?id=<?php echo $item->id; ?>">
-                                            <input type="text" name="quantity" class="quantity form-control input-number" value="<?php echo $item -> quantity; ?>" min="1" max="100">
-                                            <button style="color:white !important;" type="submit" class="btn btn-primary py-3 px-4">UpdateQuantity</button>
-                                        </form>
+                                    <form action="../../controller/cartItem/changeQuantity.php" method="POST">
+                                        <input type="hidden" name="id" value="<?php echo $item->id; ?>">
+                                        <input type="number" name="quantity" class="quantity form-control input-number" value="<?php echo $item->quantity; ?>" min="1" max="100">
+                                        <button style="color:white !important" type="submit" class="btn btn-primary py-3 px-4">Update Quantity</button>
+                                    </form>
                                     </div>
                                 </td>
                                 

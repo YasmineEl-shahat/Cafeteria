@@ -5,13 +5,13 @@
 
     include '../../models/cart.php';
    
-    $id = $_GET["id"];
-    var_dump($id);
-    exit;
+    $cart_id = $_POST['id'];
+    $new_quantity = $_POST['quantity'];
+   
     
     // save data 
     $cart = new Cart();
 
-    $cart -> update_Cart_Item($id, "quantity",$_POST['quantity'] );
+    $cart -> update_Cart_Item($cart_id, "quantity",$new_quantity);
     header("Location:../../views/cart");
 ?>
