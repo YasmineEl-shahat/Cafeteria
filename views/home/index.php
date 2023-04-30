@@ -22,6 +22,10 @@
 
     $productObj = new Product();
 
+    $cart = new Cart();
+
+    $cart_id = $cart -> get_user_Cart_id($_SESSION["user_id"])[0]->id;
+
     
 ?>
 
@@ -111,7 +115,7 @@
                                                 <div class="text">
                                                     <h3><a href="#"><?php echo $product->name; ?></a></h3>
                                                     <p class="price"><span>$<?php echo $product->price; ?></span></p>
-                                                    <p><a href="#" class="btn btn-primary btn-outline-primary">Add to cart</a></p>
+                                                    <p><a href="../../controller/cart/add-to-cart.php?cart_id=<?php echo $cart_id ;?>&product_id=<?php echo $product->id ;?>" class="btn btn-primary btn-outline-primary">Add to cart</a></p>
                                                 </div>
                                             </div>
                                         </div>

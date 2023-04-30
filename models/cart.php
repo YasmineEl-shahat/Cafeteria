@@ -43,7 +43,7 @@ class Cart extends Database
         return $data;
     }
     public function get_user_Cart_id(int $user_id){
-        $query = 'select id from carts where user_id=:user_id';
+        $query = 'select id from Cart where user_id=:user_id';
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
         $stmt->execute();
