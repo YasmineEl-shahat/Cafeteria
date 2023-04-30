@@ -6,7 +6,6 @@
     include '../../validation/validation.php';
     include '../../models/user.php';
     include '../../models/cart.php';
-
     include "../../guard/adminAuth.php";
    
     adminAuth("../../views/auth/login-form.php");
@@ -37,9 +36,10 @@
         $user = new User();
         $user -> insertUser("username", "email","password", "room", "`profile-pic`", "is_admin",
                     $_POST['username'], $_POST['email'], $_POST['password'],$_POST['room'], $imagespath, 0);
-        $user_id = $user->select_item_email($_POST['email'])->id;
+        $user = new User();
+        $user_id = $user -> select_item_email($_POST['email'])['id'];
         $cart = new Cart();
-        $cart->insertCart("user_id",$user_id);
+        $cart -> insertCart("id", "user_id",$user_id,$user_id);
         header("Location:../../views/user/users-table.php");
     }
 ?>

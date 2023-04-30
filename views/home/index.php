@@ -12,6 +12,7 @@
     include "../../guard/auth.php";
     include "../../models/category.php";
     include "../../models/product.php";
+    include "../../models/cart.php";
 
     auth("../auth/login-form.php");
 
