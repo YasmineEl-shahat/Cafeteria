@@ -1,11 +1,36 @@
 <?php
-//include '../layout/navbar.php';
-//include '../../models/Order.php';
-//$order= new Order();
-//var_dump($order->userOrders());
+include '../layout/navbar.php';
+include '../../models/Order.php';
 
-include '../../controllers/order/userOrders.php';
+$order= new Order();
+//$orders =$order->userOrders();
+//if(isset($_GET['orders'])){
+//    $orders=json_decode($_GET['orders']);
+//    var_dump($orders);
+//}else{
+//    $orders =$order->userOrders();}
+//include '../../controllers/order/userOrders.php';
 
+
+
+
+///////////////////////////////////////////
+
+// Check if a date filter has been submitted
+if (isset($_GET['from-date'])&& isset($_GET['to-date']) && $_GET['from-date'] != "" && $_GET['to-date'] != "") {
+    $fromDate = $_GET['from-date'];
+    $toDate = $_GET['to-date'];
+    // Filter the data by the specified date
+    $orders = $order->userOrdersSearch($fromDate, $toDate);
+} else {
+    // Return all data by default
+    $orders =  $order->userOrders();
+//    var_dump($orders);
+//    exit;
+//    $orderItems= $order->userOrderItem();
+//    var_dump($orderIrems);
+//    exit;
+}
 ?>
 <section class="ftco-section ">
     <div class="container mt-5">
@@ -17,7 +42,7 @@ include '../../controllers/order/userOrders.php';
                     <label class="" style="width: 20%;">From Date:</label>
                     <label style="width: 20%;" class="ml-3">To Date:</label>
                 </div>
-                <form class="">
+                <form class="" method="get" >
 
                     <input type="date" name="from-date" class=" border rounded" style="width: 20%;height:40px">
 
@@ -31,36 +56,46 @@ include '../../controllers/order/userOrders.php';
                             <tr>
                                 <th >Order Date</th>
                                 <th >Status</th>
-                                <th>Amount</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="text-left">
-                                <td ><i class="fas fa-plus " data-toggle="nested-table" data-target="#nested-div-2"></i>2020-02-01</td>
-                                <td >processing</td>
-                                <td >55 EGP</td>
-                                <td >cancel</td>
-                            </tr>
-                            <tr class="text-left">
-                            <td ><i class="fas fa-plus " data-toggle="nested-table" data-target="#nested-div-2"></i>2020-02-01</td>
-                                <td >processing</td>
-                                <td >55 EGP</td>
-                                <td >cancel</td>
-                            </tr>
+
+                            <?php
+                            $orderItems= $order->userOrderItem(1);
+                            foreach ($orders as $order) {
+
+
+                            echo "<tr class='text-left'>
+                            <td ><i class='fas fa-plus' data-toggle='nested-table' data-target='#nested-div'></i>$order->date_created</td>
+                                <td >$order->status</td>
+                          ";
+
+                                if($order->status=='proccessig')
+                                echo"<td ><a class=' btn btn-light' href=''>cancel</a></td>";
+                                else
+                                echo"<td >-</td>";
+                            echo "</tr>";
+                        }?>
                         </tbody>
                     </table>
 
-                <div id="nested-div-2" class="nested-table table mt-5 p-1 table-bordered ">
+                   <div id='nested-div' class='nested-table table mt-5 p-1 table-bordered '>
 
-                    <div class="row">
-                        <div class="col-3 ">
-                            <img class="w-100 h-75" src="../../assets/images/about.jpg"/>
-                            <p>name</p>
-                            <p>amount</p>
-                        </div>
-                    
-                    </div>
+                <?php foreach($orderItems as $order) {
+//                   echo "<div id='nested-div-$order->id' class='nested-table table mt-5 p-1 table-bordered '>" ;
+
+
+                    echo "<div class='row'>
+                        <div class='col-3' >
+                            <img class='w-100 h-75' src='../../assets/images/about.jpg'/>
+                            <p>$order->id **</p>
+                            <p>$order->price</p>
+                            <p>$order->quantity</p>
+                        </div> </div>      ";
+                     }
+                    ?>
+                   </div>
                     </div>
                 </div>
             </div>
