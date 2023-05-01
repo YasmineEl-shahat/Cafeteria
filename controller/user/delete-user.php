@@ -8,9 +8,8 @@
     error_reporting(E_ALL);
 
     include '../../models/user.php';
+    include '../../models/cart.php';
 
-
- 
     include "../../guard/adminAuth.php";
    
     adminAuth("../../views/auth/login-form.php");
@@ -23,7 +22,10 @@
 
     $imagePath = $user->select_user($user_id)["profile-pic"];
 
-    if(file_exists( $imagePath)) unlink($imagePath);
+    if(file_exists( $imagePath) && is_file($imagePath)) unlink($imagePath);
+    $cart = new Cart();
+
+    $cart->delete_Cart($user_id);
 
     $user -> delete_user($user_id);
 
