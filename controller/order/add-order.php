@@ -14,8 +14,9 @@
 
     $order = new Order();
     $cart = new Cart();
+    $timestamp = date('Y-m-d H:i:s', time());
 
-    $order->insertorder("user_id", "status", $cart_id, "processing");
+    $order->insertorder("user_id", "status","date_created" ,$cart_id, "processing",$timestamp);
     $order_id = $order -> select_last_order_id()[0]->id;
 
     $items = $cart -> get_Cart_items($cart_id);
