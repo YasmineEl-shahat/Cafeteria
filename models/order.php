@@ -50,43 +50,72 @@ class Order extends Database
             session_start();
         }
         $id= $_SESSION["user_id"];
-        $query = "SELECT o.id, o.date_created , o.status, oi.price , oi.quantity
+        $query = "SELECT  o.id as `order_id`, 
+    o.date_created as `order_date`, 
+    o.status as `order_status`,
+    oi.id as `order_item_id`, 
+    oi.product_id as `product_id`, 
+    oi.price as `item_price`, 
+    oi.quantity as `item_quantity`
           FROM ".$this->dbname.".Order o
           LEFT JOIN Order_Item oi ON o.id = oi.order_id
           WHERE o.user_id = ?
-          GROUP BY o.id";
-//        $query = "SELECT o.date_created , o.status   FROM ".$this->dbname.".User u LEFT JOIN  Order o ON  o.user_id = u.id WHERE u.id =?";
-//        $query = "SELECT o.id, o.date_created, o.status FROM User u LEFT JOIN `Order` o ON o.user_id = u.id WHERE u.id = ?";
+         ";
+
         $stmt = $this->db->prepare($query);
         $res = $stmt->execute([$id]);
         $data = $stmt->fetchAll(PDO::FETCH_OBJ);
         $stmt->closeCursor();
-        return $data;
+        return $this->result($data);
     }
-    public function userOrderItem($orderId) {
 
-        if(!isset($_SESSION)) {
-            session_start();
+public function result($data){
+        // Create an array to store the user and order data
+        $orders = array();
+
+// Loop through the result set and populate the users array
+        foreach ($data as $row) {
+            // Create a user object if it doesn't exist
+            if (!isset($orders[$row->order_id])) {
+                $orders[$row->order_id] = array(
+                    'order_id' => $row->order_id,
+                    'order_status' => $row->order_status,
+                    'order_date' => $row->order_date,
+                    'order_items' => array()
+                );
+            }
+
+            // Add the order data to the user's orders array
+            $orders[$row->order_id]['order_items'][] = array(
+                'order_item_id' => $row->order_item_id,
+                'product_id' => $row->product_id,
+                'item_price' => $row->item_price,
+                'item_quantity' => $row->item_quantity,
+            );
         }
+        return $orders;
+    }
+
+    public function userOrdersSearchByDate($fromDate,$toDate){
         $id= $_SESSION["user_id"];
-        $query = "SELECT o.id, oi.price , oi.quantity   FROM ".$this->dbname.".Order o LEFT JOIN Order_Item oi ON o.id = oi.order_id WHERE o.user_id =? and oi.order_id = $orderId ";
+        $query = "SELECT  o.id as `order_id`, 
+    o.date_created as `order_date`, 
+    o.status as `order_status`,
+    oi.id as `order_item_id`, 
+    oi.product_id as `product_id`, 
+    oi.price as `item_price`, 
+    oi.quantity as `item_quantity`
+          FROM ".$this->dbname.".Order o
+          LEFT JOIN Order_Item oi ON o.id = oi.order_id
+          WHERE o.user_id = ?
+          AND  (DATE_FORMAT(o.date_created, '%Y-%m-%d') BETWEEN DATE_FORMAT('$fromDate', '%Y-%m-%d') AND DATE_FORMAT('$toDate', '%Y-%m-%d')) ";
         $stmt = $this->db->prepare($query);
         $res = $stmt->execute([$id]);
         $data = $stmt->fetchAll(PDO::FETCH_OBJ);
         $stmt->closeCursor();
-        return $data;
+        return $this->result($data);
     }
-    public  function userOrdersSearch($fromDate,$toDate){
 
-        $id= $_SESSION["user_id"];
-        $query = "SELECT * FROM ".$this->dbname.".Order o LEFT JOIN Order_Item oi ON o.id = oi.order_id WHERE o.user_id = ? AND STR_TO_DATE(o.date_created, '%Y-%m-%d') BETWEEN STR_TO_DATE($fromDate, '%Y-%m-%d') AND STR_TO_DATE($toDate, '%Y-%m-%d')";
-        $stmt = $this->db->prepare($query);
-        $res = $stmt->execute([$id]);
-          $stmt = $this->db->prepare($query);
-        $res = $stmt->execute([$id]);
-        $data = $stmt->fetchAll(PDO::FETCH_OBJ);
-        return $data;
-    }
     public function get_order_items(string $id)
     {
         $query = "SELECT Product.name, Product.image, Order_Item.quantity
