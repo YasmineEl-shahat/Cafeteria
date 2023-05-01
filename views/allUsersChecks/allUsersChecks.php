@@ -14,7 +14,7 @@ if (isset($_GET['from-date']) && isset($_GET['to-date']) && isset($_GET['name'])
 }
 
 
-var_dump($users)
+//var_dump($users)
 
 ?>
 <section class="ftco-section ">
