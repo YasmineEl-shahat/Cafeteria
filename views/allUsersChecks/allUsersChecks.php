@@ -81,7 +81,7 @@ if (isset($_GET['from-date']) && isset($_GET['to-date']) && isset($_GET['name'])
                                     <tr class='text-left'>
                                         <td>
                                             <i class='fas fa-plus' data-toggle='nested-table' data-target='#nested-div-<?php echo $user["user_id"] . "-" . $order_id; ?>'></i>
-                                            <?php echo $order_items[1]["order_date"]; ?>
+                                            <?php echo $order_items[0]["order_date"]; ?>
                                         </td>
                                         <td>
                                             <?php echo array_reduce($order_items, function ($total, $item) {
