@@ -3,33 +3,16 @@ include '../layout/navbar.php';
 include '../../models/Order.php';
 
 $order= new Order();
-//$orders =$order->userOrders();
-//if(isset($_GET['orders'])){
-//    $orders=json_decode($_GET['orders']);
-//    var_dump($orders);
-//}else{
-//    $orders =$order->userOrders();}
-//include '../../controllers/order/userOrders.php';
 
-
-
-
-///////////////////////////////////////////
 
 // Check if a date filter has been submitted
-if (isset($_GET['from-date'])&& isset($_GET['to-date']) && $_GET['from-date'] != "" && $_GET['to-date'] != "") {
-    $fromDate = $_GET['from-date'];
-    $toDate = $_GET['to-date'];
-    // Filter the data by the specified date
-    $orders = $order->userOrdersSearch($fromDate, $toDate);
+if (isset($_GET['from-date']) && $_GET['from-date'] != '' && isset($_GET['to-date']) && $_GET['to-date'] != '' ) {
+    $from_date = $_GET['from-date'];
+    $to_date = $_GET['to-date'];
+    $orders = $order->userOrdersSearchByDate($from_date, $to_date);
 } else {
     // Return all data by default
-    $orders =  $order->userOrders();
-//    var_dump($orders);
-//    exit;
-//    $orderItems= $order->userOrderItem();
-//    var_dump($orderIrems);
-//    exit;
+    $orders = $order->userOrders();
 }
 ?>
 <section class="ftco-section ">
@@ -63,40 +46,43 @@ if (isset($_GET['from-date'])&& isset($_GET['to-date']) && $_GET['from-date'] !=
                         <tbody>
 
                             <?php
-                            $orderItems= $order->userOrderItem(1);
+//                            $orderItems= $order->userOrderItem(1);
                             foreach ($orders as $order) {
+                                echo "<tr class='text-left'>
+                                  <td><i class='fas fa-plus' data-toggle='nested-table' data-target='#nested-div-{$order['order_id']}'></i>{$order['order_date']}</td>
+                                  <td>{$order['order_status']}</td>
+                             ";
 
+                                if($order['order_status']=='proccessig') {
+                                        $delete_url = "../../controller/order/delete-order.php?order_id={$order['order_id']}";
+                                        echo "<td> <a href='" . "{$delete_url}" . "' class='btn btn-light'>Cancel</a> </td>";
 
-                            echo "<tr class='text-left'>
-                            <td ><i class='fas fa-plus' data-toggle='nested-table' data-target='#nested-div'></i>$order->date_created</td>
-                                <td >$order->status</td>
-                          ";
-
-                                if($order->status=='proccessig')
-                                echo"<td ><a class=' btn btn-light' href=''>cancel</a></td>";
-                                else
+                                    }
+                            else
                                 echo"<td >-</td>";
                             echo "</tr>";
                         }?>
                         </tbody>
                     </table>
 
-                    <div id='nested-div' class='nested-table table mt-5 p-1 table-bordered '>
 
-                        <?php foreach($orderItems as $order) {
-//                   echo "<div id='nested-div-$order->id' class='nested-table table mt-5 p-1 table-bordered '>" ;
+        <!--order items-->
+             <?php foreach($orders as $order) {
+              echo "<div id='nested-div-{$order['order_id']}' class='nested-table table mt-5 p-1 table-bordered  '>" ;
 
-
-                    echo "<div class='row'>
+            foreach($order['order_items'] as $item) {
+                echo "<div class='row d-flex flex-row justify-content-around my-1'>
                         <div class='col-3' >
                             <img class='w-100 h-75' src='../../assets/images/about.jpg'/>
-                            <p>$order->id **</p>
-                            <p>$order->price</p>
-                            <p>$order->quantity</p>
-                        </div> </div>      ";
+                          
+                            <p class='my-1 font-weight-bold'>price: {$item['item_price']}</p>
+                            <p class='my-1 font-weight-bold'>quntity: {$item['item_quantity']}</p>
+                        </div></div>  ";}
+            echo "   </div> ";
+
                      }
                     ?>
-                    </div>
+
                 </div>
             </div>
         </div>
