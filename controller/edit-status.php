@@ -1,6 +1,6 @@
 <?php
 $old_val = $_GET['status'];
-if ($old_val == 'proccessig') {
+if ($old_val == 'processing') {
     $new_val = 'outForDelivery';
 } elseif ($old_val == 'outForDelivery') {
     $new_val = 'done';

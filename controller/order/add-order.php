@@ -16,12 +16,12 @@
     $cart = new Cart();
 
     $order->insertorder("user_id", "status", $cart_id, "processing");
-    $order_id = $order -> select_last_order_id();
+    // $order_id = $order -> select_last_order_id();
 
     $items = $cart -> get_Cart_items($cart_id);
 
    
 
-    var_dump($order_id);
+    // var_dump($order_id);
     // header("Location:../../views/cart");
 ?>

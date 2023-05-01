@@ -38,7 +38,7 @@ class Order extends Database
         FROM User
         INNER JOIN `Order` ON User.id = `Order`.user_id;
         WHERE `Order`.status = 'outForDelivery'";
-        //  -- WHERE `Order`.status = 'proccessig'
+        //  -- WHERE `Order`.status = 'processing'
         return Parent::execute_query_without_id($query);
     }
     public function userOrders(...$args) {
