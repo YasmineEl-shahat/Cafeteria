@@ -1,12 +1,22 @@
 <?php
+// Load environment variables from .env file
+$env_path = dirname(__DIR__) . '/.env';
+if (file_exists($env_path)) {
+    $lines = file($env_path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    foreach ($lines as $line) {
+        putenv($line);
+    }
+  
+}
+
 class Database{
     protected $db;
     protected $dbname='php_nabila';
     private function connect(){
-        $dsn = 'mysql:dbname=php_nabila;host=nader-mo.tech;port=3306;'; 
-        $this->db= new PDO($dsn, 'php_nabila', 'Aa123456');
+        $dsn = "mysql:host=" . getenv('HOST') . ";port=" . getenv('PORT') . ";dbname=" . getenv('DB_NAME');
+        $this->db= new PDO($dsn,  getenv('USERNAME'), getenv('PASSWORD'));
     }
-    
+
     public function __construct(){
         $this->connect();
     }
