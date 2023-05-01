@@ -12,6 +12,7 @@ adminAuth("../auth/login-form.php");
     <div class="row">
         <div class="col-md-12">
             <h1>Products</h1>
+            <input type="button" value="Add Product" style="float:right;" class="btn btn-primary py-3 px-5 my-2" onclick="redirectToNewPage()">
             <table class="table table-bordered">
                 <thead>
                     <tr>
@@ -56,7 +57,7 @@ adminAuth("../auth/login-form.php");
             </table>
         </div>
     </div>
-<input type="button" value="Add Product " class="btn btn-primary py-3 px-5 m-auto" onclick="redirectToNewPage()">
+
 
 </div>
 <script>
