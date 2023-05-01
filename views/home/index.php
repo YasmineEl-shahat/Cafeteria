@@ -1,7 +1,11 @@
 <?php
 
-    include '../layout/adminnavbar.php';
-
+    if(!empty($_SESSION) && $_SESSION['role'] == 1){
+        include '../layout/adminnavbar.php';
+    }
+    else {
+        include "../layout/navbar.php";
+    }
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
@@ -10,7 +14,7 @@
     include "../../models/product.php";
     include "../../models/cart.php";
 
-    // auth("../auth/login-form.php");
+   
 
     $categoryObj = new Category();
 

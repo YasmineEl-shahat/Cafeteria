@@ -6,10 +6,8 @@
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
 
-    // include "../../guard/auth.php";
     include "../../models/cart.php";
 
-    // auth("../auth/login-form.php");
 
     $cart = new Cart();
     $cart_id = $cart -> get_user_Cart_id($_SESSION["user_id"])[0]->id;
