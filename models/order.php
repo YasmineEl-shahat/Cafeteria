@@ -119,4 +119,7 @@ public function result($data){
         $query = 'SELECT `id` FROM `Order` ORDER BY `id` DESC LIMIT 1';
         return Parent::execute_query_without_id($query);
     }
+    public function insert_order_item(...$args){
+        parent::insert("Order_Item", ...$args);
+    }
 }
