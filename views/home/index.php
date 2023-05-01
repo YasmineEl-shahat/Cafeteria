@@ -1,20 +1,17 @@
 <?php
-
-
-
-    include '../layout/navbar.php';
-
-
-    ini_set('display_errors', 1);
-    ini_set('display_startup_errors', 1);
-    error_reporting(E_ALL);
-
-    include "../../guard/auth.php";
+    session_start();
+    if(!empty($_SESSION) && $_SESSION['role'] == 1){
+        
+        include '../layout/adminnavbar.php';
+    }
+    else {
+        include "../layout/navbar.php";
+    }
+   
     include "../../models/category.php";
     include "../../models/product.php";
     include "../../models/cart.php";
 
-    auth("../auth/login-form.php");
 
     $categoryObj = new Category();
 
@@ -40,7 +37,7 @@
             	<span class="subheading">Welcome</span>
               <h1 class="mb-4">The Best Coffee Testing Experience</h1>
               <p class="mb-4 mb-md-5">A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-              <p><a href="#" class="btn btn-primary p-3 px-xl-4 py-xl-3">Order Now</a> <a href="#menu" class="btn btn-white btn-outline-white p-3 px-xl-4 py-xl-3">View Menu</a></p>
+              <p><a href="../cart" class="btn btn-primary p-3 px-xl-4 py-xl-3">Order Now</a> <a href="#menu" class="btn btn-white btn-outline-white p-3 px-xl-4 py-xl-3">View Menu</a></p>
             </div>
 
           </div>
@@ -115,8 +112,14 @@
                                                 <div class="text">
                                                     <h3><a href="#"><?php echo $product->name; ?></a></h3>
                                                     <p class="price"><span>$<?php echo $product->price; ?></span></p>
-                                                    <p><a href="../../controller/cart/add-to-cart.php?cart_id=<?php echo $cart_id ;?>&product_id=<?php echo $product->id ;?>" class="btn btn-primary btn-outline-primary">Add to cart</a></p>
-                                                </div>
+                                                    <?php if(!$cart -> is_in_cart($cart_id,$product->id)) { ?>
+                                                      <p><a href="../../controller/cart/add-to-cart.php?cart_id=<?php echo $cart_id ;?>
+                                                      &product_id=<?php echo $product->id ;?>" class="btn btn-primary btn-outline-primary">
+                                                      Add to cart</a></p>
+                                                    <?php } else { ?>
+                                                      <p><button class="btn btn-primary" style="color:white;background: #c49b63;">In cart</button></p>
+                                                    <?php } ?>
+                                                  </div>
                                             </div>
                                         </div>
                                     <?php } ?>

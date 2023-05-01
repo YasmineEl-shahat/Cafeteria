@@ -38,12 +38,73 @@ class Order extends Database
         FROM User
         INNER JOIN `Order` ON User.id = `Order`.user_id;
         WHERE `Order`.status = 'outForDelivery'";
-        //  -- WHERE `Order`.status = 'proccessig'
-        $stmt = $this->db->prepare($query);
-        $stmt->execute();
-        $data = $stmt->fetchAll(PDO::FETCH_OBJ);
-        return $data;
+        //  -- WHERE `Order`.status = 'processing'
+        return Parent::execute_query_without_id($query);
     }
+    public function userOrders(...$args) {
+
+        if(!isset($_SESSION)) {
+            session_start();
+        }
+        $id= $_SESSION["user_id"];
+        $query = "SELECT  o.id as `order_id`, 
+    o.date_created as `order_date`, 
+    o.status as `order_status`,
+    oi.id as `order_item_id`, 
+    oi.product_id as `product_id`, 
+    oi.price as `item_price`, 
+    oi.quantity as `item_quantity`
+          FROM ".$this->dbname.".Order o
+          LEFT JOIN Order_Item oi ON o.id = oi.order_id
+          WHERE o.user_id = ?
+         ";
+        $data=Parent::execute_query($query, $id);
+        return $this->result($data);
+    }
+
+public function result($data){
+        // Create an array to store the user and order data
+        $orders = array();
+
+// Loop through the result set and populate the users array
+        foreach ($data as $row) {
+            // Create a user object if it doesn't exist
+            if (!isset($orders[$row->order_id])) {
+                $orders[$row->order_id] = array(
+                    'order_id' => $row->order_id,
+                    'order_status' => $row->order_status,
+                    'order_date' => $row->order_date,
+                    'order_items' => array()
+                );
+            }
+
+            // Add the order data to the user's orders array
+            $orders[$row->order_id]['order_items'][] = array(
+                'order_item_id' => $row->order_item_id,
+                'product_id' => $row->product_id,
+                'item_price' => $row->item_price,
+                'item_quantity' => $row->item_quantity,
+            );
+        }
+        return $orders;
+    }
+
+    public function userOrdersSearchByDate($fromDate,$toDate){
+        $id= $_SESSION["user_id"];
+        $query = "SELECT  o.id as `order_id`, 
+    o.date_created as `order_date`, 
+    o.status as `order_status`,
+    oi.id as `order_item_id`, 
+    oi.product_id as `product_id`, 
+    oi.price as `item_price`, 
+    oi.quantity as `item_quantity`
+          FROM ".$this->dbname.".Order o
+          LEFT JOIN Order_Item oi ON o.id = oi.order_id
+          WHERE o.user_id = ?
+          AND  (DATE_FORMAT(o.date_created, '%Y-%m-%d') BETWEEN DATE_FORMAT('$fromDate', '%Y-%m-%d') AND DATE_FORMAT('$toDate', '%Y-%m-%d')) ";$data=Parent::execute_query($query, $id);
+        return $this->result($data);
+    }
+
     public function get_order_items(string $id)
     {
         $query = "SELECT Product.name, Product.image, Order_Item.quantity
@@ -51,11 +112,14 @@ class Order extends Database
         INNER JOIN Order_Item ON Product.id = Order_Item.product_id
         INNER JOIN `Order` ON Order_Item.order_id = `Order`.id
         WHERE `Order`.id = ?;
-        
         ";
-        $stmt = $this->db->prepare($query);
-        $res = $stmt->execute([$id]);
-        $data = $stmt->fetchAll(PDO::FETCH_OBJ);
-        return $data;
+        return Parent::execute_query($query, $id);
+    }
+    public function select_last_order_id(){
+        $query = 'SELECT `id` FROM `Order` ORDER BY `id` DESC LIMIT 1';
+        return Parent::execute_query_without_id($query);
+    }
+    public function insert_order_item(...$args){
+        parent::insert("Order_Item", ...$args);
     }
 }

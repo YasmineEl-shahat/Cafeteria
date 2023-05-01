@@ -1,5 +1,5 @@
 <?php
-include "../../views/layout/navbar.php";
+include "../../views/layout/adminnavbar.php";
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -10,6 +10,9 @@ include "../../models/user.php";
 include "../../guard/adminAuth.php";
 
 adminAuth("../auth/login-form.php");
+if(empty($_SESSION) ){
+    header("location:../auth/login-form.php");
+}
 
 $user_id = $_GET['id'];
 $edit_url = "../../controller/user/edit-user.php?id={$user_id}";

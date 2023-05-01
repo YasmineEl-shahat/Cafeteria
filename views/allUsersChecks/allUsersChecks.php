@@ -1,20 +1,21 @@
 <?php
-include '../layout/navbar.php';
-include "../../models/user.php";
-include "../../controller/order/allUsersOrders.php";
+    include "../../guard/adminAuth.php";
 
-if (isset($_GET['from-date']) && isset($_GET['to-date']) && isset($_GET['name']) && $_GET['from-date'] != '' && $_GET['to-date'] != '' && $_GET['name'] != '') {
-    $from_date = $_GET['from-date'];
-    $to_date = $_GET['to-date'];
-    $name = $_GET['name'];
-    $users=allUsersOrdersFilter($from_date,$to_date ,$name);
-} else {
-    $users=allUsersOrders();
-    
-}
+    adminAuth("../auth/login-form.php");
+    include '../layout/adminnavbar.php';
+    include "../../models/user.php";
+    include "../../controller/order/allUsersOrders.php";
 
+    if (isset($_GET['from-date']) && isset($_GET['to-date']) && isset($_GET['name']) && $_GET['from-date'] != '' && $_GET['to-date'] != '' && $_GET['name'] != '') {
+        $from_date = $_GET['from-date'];
+        $to_date = $_GET['to-date'];
+        $name = $_GET['name'];
+        $users=allUsersOrdersFilter($from_date,$to_date ,$name);
+    } else {
+        $users=allUsersOrders();
+        
+    }
 
-//var_dump($users)
 
 ?>
 <section class="ftco-section ">

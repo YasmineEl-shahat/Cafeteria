@@ -1,4 +1,6 @@
 <?php
+
+
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
@@ -32,7 +34,7 @@
         // uploading image
         if($profile_name != ""){
             $imagePath = $_GET["imgPath"];
-            if(file_exists( $imagePath))  unlink($imagePath);
+            if(file_exists( $imagePath)  && is_file($imagePath))  unlink($imagePath);
             sys_get_temp_dir();
             move_uploaded_file($profile_tmp,"../../assets/images/users/{$profile_name}");
             $imagePath = "../../assets/images/users/{$profile_name}";

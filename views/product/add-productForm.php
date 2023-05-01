@@ -1,5 +1,5 @@
 <?php
-include '../layout/navbar.php';
+include '../layout/adminnavbar.php';
 include "../../models/category.php";
 include "../../guard/adminAuth.php";
   adminAuth("../auth/login-form.php");
