@@ -68,6 +68,13 @@ class Cart extends Database
         "cart_id","product_id", "quantity",
          $cart_id, $product_id,  1);
     }
+    public function remove_Cart_Item(int $cart_id, int $product_id){
+        $query="Delete from Cart_Item where cart_id=:cart_id and product_id=:product_id";
+        $delete_stmt = $this->db->prepare($query);
+        $delete_stmt->bindParam(':cart_id', $cart_id, PDO::PARAM_INT);
+        $delete_stmt->bindParam(':product_id', $product_id, PDO::PARAM_INT);
+        $res=$delete_stmt->execute();
+    }
     public function getTotalPrice(string $id){
         $query = "select sum(quantity*price) as total from Cart_Item inner join Product 
         on product_id = Product.id where cart_id = ?";

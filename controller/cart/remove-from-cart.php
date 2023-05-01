@@ -14,6 +14,6 @@
 
     $cart = new Cart();
 
-    $cart -> add_Cart_Item($cart_id, $product_id);
-    header("Location:../../views/home");
+    $cart -> remove_Cart_Item($cart_id, $product_id);
+    header("Location:../../views/cart");
 ?>

@@ -36,7 +36,8 @@
                         <tbody>
                             <?php foreach($items as $item) { ?>
                             <tr class="text-center">
-                                <td class="product-remove"><a href="#"><span class="icon-close"></span></a></td>
+                                <td class="product-remove">
+                                    <a href="../../controller/cart/remove-from-cart.php?cart_id=<?php echo $cart_id ;?>&product_id=<?php echo $item->product_id ;?>"><span class="icon-close"></span></a></td>
                                 
                                 <td class="image-prod"><div class="img" style="background-image:url(<?php echo $item->image; ?>);"></div></td>
                                 
