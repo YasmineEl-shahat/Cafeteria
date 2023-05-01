@@ -1,7 +1,7 @@
 <?php
     include "../../models/product.php";
     include "../../models/category.php";
-    include '../layout/navbar.php'; 
+    include '../layout/adminnavbar.php'; 
     include "../../guard/adminAuth.php";
 
     adminAuth("../auth/login-form.php");
