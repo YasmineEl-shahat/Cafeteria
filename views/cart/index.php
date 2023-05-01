@@ -86,7 +86,7 @@
                         <span>$<?php echo $total-3.00; ?></span>
                     </p>
                 </div>
-                <p class="text-center"><a href="checkout.html" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>
+                <p class="text-center"><a href="../../controller/order/add-order.php?cart_id=<?php echo $cart_id ?>" class="btn btn-primary py-3 px-4">Proceed Order</a></p>
             </div>
         </div>
     </div>

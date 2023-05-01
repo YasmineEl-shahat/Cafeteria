@@ -39,10 +39,7 @@ class Order extends Database
         INNER JOIN `Order` ON User.id = `Order`.user_id;
         WHERE `Order`.status = 'outForDelivery'";
         //  -- WHERE `Order`.status = 'proccessig'
-        $stmt = $this->db->prepare($query);
-        $stmt->execute();
-        $data = $stmt->fetchAll(PDO::FETCH_OBJ);
-        return $data;
+        return Parent::execute_query_without_id($query);
     }
     public function userOrders(...$args) {
 
@@ -57,11 +54,7 @@ class Order extends Database
           GROUP BY o.id";
 //        $query = "SELECT o.date_created , o.status   FROM ".$this->dbname.".User u LEFT JOIN  Order o ON  o.user_id = u.id WHERE u.id =?";
 //        $query = "SELECT o.id, o.date_created, o.status FROM User u LEFT JOIN `Order` o ON o.user_id = u.id WHERE u.id = ?";
-        $stmt = $this->db->prepare($query);
-        $res = $stmt->execute([$id]);
-        $data = $stmt->fetchAll(PDO::FETCH_OBJ);
-        $stmt->closeCursor();
-        return $data;
+        return Parent::execute_query($query, $id);
     }
     public function userOrderItem($orderId) {
 
@@ -70,22 +63,13 @@ class Order extends Database
         }
         $id= $_SESSION["user_id"];
         $query = "SELECT o.id, oi.price , oi.quantity   FROM ".$this->dbname.".Order o LEFT JOIN Order_Item oi ON o.id = oi.order_id WHERE o.user_id =? and oi.order_id = $orderId ";
-        $stmt = $this->db->prepare($query);
-        $res = $stmt->execute([$id]);
-        $data = $stmt->fetchAll(PDO::FETCH_OBJ);
-        $stmt->closeCursor();
-        return $data;
+        return Parent::execute_query($query, $id);
     }
     public  function userOrdersSearch($fromDate,$toDate){
 
         $id= $_SESSION["user_id"];
         $query = "SELECT * FROM ".$this->dbname.".Order o LEFT JOIN Order_Item oi ON o.id = oi.order_id WHERE o.user_id = ? AND STR_TO_DATE(o.date_created, '%Y-%m-%d') BETWEEN STR_TO_DATE($fromDate, '%Y-%m-%d') AND STR_TO_DATE($toDate, '%Y-%m-%d')";
-        $stmt = $this->db->prepare($query);
-        $res = $stmt->execute([$id]);
-          $stmt = $this->db->prepare($query);
-        $res = $stmt->execute([$id]);
-        $data = $stmt->fetchAll(PDO::FETCH_OBJ);
-        return $data;
+        return Parent::execute_query($query, $id);
     }
     public function get_order_items(string $id)
     {
@@ -94,11 +78,11 @@ class Order extends Database
         INNER JOIN Order_Item ON Product.id = Order_Item.product_id
         INNER JOIN `Order` ON Order_Item.order_id = `Order`.id
         WHERE `Order`.id = ?;
-        
         ";
-        $stmt = $this->db->prepare($query);
-        $res = $stmt->execute([$id]);
-        $data = $stmt->fetchAll(PDO::FETCH_OBJ);
-        return $data;
+        return Parent::execute_query($query, $id);
+    }
+    public function select_last_order_id(){
+        $query = 'select id from Order ORDER BY id DESC LIMIT 1';
+        return Parent::execute_query_without_id($query);
     }
 }

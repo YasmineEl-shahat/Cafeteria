@@ -1,6 +1,8 @@
 <?php
 function auth(string $location){
-    session_start();
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
     if(empty($_SESSION)){
         header("Location:".$location);
     }

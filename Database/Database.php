@@ -88,4 +88,18 @@ class Database{
         $delete_stmt->bindParam(':user_id', $id, PDO::PARAM_INT);
         $res=$delete_stmt->execute();
     }
+
+    public function execute_query_without_id($query){
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        $data = $stmt->fetchAll(PDO::FETCH_OBJ);
+        return $data;
+    }
+    public function execute_query($query, $id){
+        $stmt = $this->db->prepare($query);
+        $res = $stmt->execute([$id]);
+        $data = $stmt->fetchAll(PDO::FETCH_OBJ);
+        $stmt->closeCursor();
+        return $data;
+    }
 }

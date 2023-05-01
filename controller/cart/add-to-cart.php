@@ -5,6 +5,10 @@
 
     include '../../models/cart.php';
    
+    include "../../guard/auth.php";
+   
+    auth("../../views/auth/login-form.php");
+
     $cart_id = $_GET["cart_id"];
     $product_id = $_GET["product_id"];
 
