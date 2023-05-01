@@ -28,8 +28,11 @@
     $category_id=$category->selectCategoryIdByName($categoryName);
     
     if($product_image != ""){
+        $imagePath = $_GET["imgPath"];
         $product_image = "../../assets/images/products/{$product_image}";
-        move_uploaded_file($product_tmp,"../../assets/images/products/{$product_image}");
+        if(file_exists( $imagePath)  && is_file($imagePath))  unlink($imagePath);
+        sys_get_temp_dir();
+        move_uploaded_file($product_tmp, $product_image);
         $product->update_product($_GET['id'],"name", "price", "image","availability", "category_id",
             $_POST['name'], $_POST['price'], $product_image,$_POST['availability'], $category_id);
             header("Location:../../views/product/products-table.php");
