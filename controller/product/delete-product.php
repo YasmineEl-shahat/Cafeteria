@@ -6,7 +6,7 @@
     ############################# Delete
     $product = new product();
     $imagePath = $product->select_product($product_id)["image"];
-    if(file_exists( $imagePath)) unlink($imagePath);
+    if(file_exists( $imagePath) && is_file($imagePath)) unlink($imagePath);
     $product -> delete_product($product_id);
     header("Location:../../views/product/products-table.php");
 ?>
