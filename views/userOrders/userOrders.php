@@ -1,5 +1,5 @@
 <?php
-include '../layout/adminnavbar.php';
+include '../layout/navbar.php';
 include '../../models/Order.php';
 
 $order= new Order();
