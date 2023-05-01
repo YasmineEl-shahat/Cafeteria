@@ -77,4 +77,13 @@ class Cart extends Database
         $query = "delete from Cart_Item where cart_id = ?";
         return Parent::execute_query($query, $id);
     }
+    public function is_in_cart(int $cart_id, int $product_id){
+        $query = "select product_id from Cart_Item where cart_id=:cart_id and product_id=:product_id";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':cart_id', $cart_id, PDO::PARAM_INT);
+        $stmt->bindParam(':product_id', $product_id, PDO::PARAM_INT);
+        $res = $stmt->execute();
+        $data = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $data;
+    }
 }

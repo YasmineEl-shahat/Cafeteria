@@ -112,8 +112,14 @@
                                                 <div class="text">
                                                     <h3><a href="#"><?php echo $product->name; ?></a></h3>
                                                     <p class="price"><span>$<?php echo $product->price; ?></span></p>
-                                                    <p><a href="../../controller/cart/add-to-cart.php?cart_id=<?php echo $cart_id ;?>&product_id=<?php echo $product->id ;?>" class="btn btn-primary btn-outline-primary">Add to cart</a></p>
-                                                </div>
+                                                    <?php if(!$cart -> is_in_cart($cart_id,$product->id)) { ?>
+                                                      <p><a href="../../controller/cart/add-to-cart.php?cart_id=<?php echo $cart_id ;?>
+                                                      &product_id=<?php echo $product->id ;?>" class="btn btn-primary btn-outline-primary">
+                                                      Add to cart</a></p>
+                                                    <?php } else { ?>
+                                                      <p><button class="btn btn-primary" style="color:white;background: #c49b63;">In cart</button></p>
+                                                    <?php } ?>
+                                                  </div>
                                             </div>
                                         </div>
                                     <?php } ?>
