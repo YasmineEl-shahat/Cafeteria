@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 ?>
 
@@ -36,22 +36,21 @@ session_start();
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <style>
-  /* Hide all nested tables by default */
-  .nested-table {
-    display: none;
-  }
+    /* Hide all nested tables by default */
+    .nested-table {
+      display: none;
+    }
 
-  /* Show a nested table when it has the "nested-table-visible" class */
-  .nested-table-visible {
-    display: table;
-  }
+    /* Show a nested table when it has the "nested-table-visible" class */
+    .nested-table-visible {
+      display: table;
+    }
 
-  /* Style the icons */
-  .fas {
-    cursor: pointer;
-  }
-
-</style>
+    /* Style the icons */
+    .fas {
+      cursor: pointer;
+    }
+  </style>
 
 </head>
 
@@ -64,31 +63,21 @@ session_start();
       </button>
       <div class="collapse navbar-collapse" id="ftco-nav">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
-          <li class="nav-item"><a href="menu.html" class="nav-link">Menu</a></li>
-          <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
-          <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-          <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="room.html" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
-            <div class="dropdown-menu" aria-labelledby="dropdown04">
-              <a class="dropdown-item" href="shop.html">Shop</a>
-              <a class="dropdown-item" href="product-single.html">Single Product</a>
-              <a class="dropdown-item" href="room.html">Cart</a>
-              <a class="dropdown-item" href="checkout.html">Checkout</a>
-            </div>
-          </li>
-          <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-          <li class="nav-item cart"><a href="cart.html" class="nav-link"><span class="icon icon-shopping_cart"></span><span class="bag d-flex justify-content-center align-items-center"><small>1</small></span></a></li>
+          <li class="nav-item active"><a href="../home/index.php" class="nav-link">Home</a></li>
+          <li class="nav-item"><a href="../product/products-table.php" class="nav-link">Products</a></li>
+          <li class="nav-item"><a href="../user/users-table.php" class="nav-link">Users</a></li>
+          <li class="nav-item"><a href="../userOrders/userOrders.php" class="nav-link">Search</a></li>
+          <li class="nav-item"><a href="../order/admin-orders.php" class="nav-link">Orders</a></li>
+          <li class="nav-item"><a href="../category/add-categoryForm.php" class="nav-link">Add Category</a></li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php echo $_SESSION['username']; ?></a>
             <div class="dropdown-menu" aria-labelledby="dropdown04">
-              <a class="dropdown-item" href="../../controller/auth/logout.php" >Logout</a>
+              <a class="dropdown-item" href="../../controller/auth/logout.php">Logout</a>
             </div>
           </li>
         </ul>
       </div>
     </div>
   </nav>
-  
+
   <!-- END nav -->

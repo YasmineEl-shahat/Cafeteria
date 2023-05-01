@@ -1,5 +1,5 @@
 <?php
-include '../layout/navbar.php';
+include '../layout/adminnavbar.php';
 // include '../layout/home-slider.php';
 include "../../models/product.php";
 include "../../models/category.php";
@@ -56,8 +56,9 @@ adminAuth("../auth/login-form.php");
             </table>
         </div>
     </div>
-</div>
 <input type="button" value="Add Product " class="btn btn-primary py-3 px-5 m-auto" onclick="redirectToNewPage()">
+
+</div>
 <script>
     function redirectToNewPage() {
       window.location.href = "./add-productForm.php";
