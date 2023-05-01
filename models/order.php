@@ -116,7 +116,7 @@ public function result($data){
         return Parent::execute_query($query, $id);
     }
     public function select_last_order_id(){
-        $query = 'select id from Order ORDER BY id DESC LIMIT 1';
+        $query = 'SELECT `id` FROM `Order` ORDER BY `id` DESC LIMIT 1';
         return Parent::execute_query_without_id($query);
     }
 }
