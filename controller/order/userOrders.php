@@ -10,7 +10,7 @@ $order= new Order();
 if(isset($_POST['from-date'])&&isset($_POST['to-date']) && $_POST['from-date']!=""&&$_POST['to-date']!=""){
     $fromDate=$_POST['from-date'];
     $toDate=$_POST['to-date'];
-    $orders =$order->userOrdersSearch($fromDate,$toDate);
+    $orders =$order->userOrdersSearchByDate($fromDate,$toDate);
 //    var_dump($orders);
 //    exit;
     $orders = json_encode($orders);
