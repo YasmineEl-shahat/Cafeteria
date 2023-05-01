@@ -8,6 +8,7 @@ include "../../views/layout/adminnavbar.php";
     error_reporting(E_ALL);
    
     include "../../models/user.php";
+
     include "../../guard/adminAuth.php";
 
     adminAuth("../auth/login-form.php");
