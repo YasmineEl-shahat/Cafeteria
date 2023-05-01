@@ -27,6 +27,10 @@ class Cart extends Database
         parent::update("Cart", $id, ...$args);
     }
 
+    public function update_Cart_Item(int $id, ...$args)
+    {
+        parent::update("Cart_Item", $id, ...$args);
+    }
     public function delete_Cart(int $id)
     {
         parent::delete("Cart", $id);
@@ -52,10 +56,10 @@ class Cart extends Database
     }
     public function get_Cart_items(string $id)
     {
-        $query = "SELECT Product.name, Product.image, Cart_Item.quantity
+        $query = "SELECT Cart_Item.id as id ,Product.name as name, Product.price as price, Product.image as image, Cart_Item.quantity as quantity
         FROM Product
         INNER JOIN Cart_Item ON Product.id = Cart_Item.product_id
-        INNER JOIN `Cart` ON Cart_Item.cart_id = `Cart`.id";
+        INNER JOIN `Cart` ON Cart_Item.cart_id = `Cart`.id where Cart.id=?";
         $stmt = $this->db->prepare($query);
         $res = $stmt->execute([$id]);
         $data = $stmt->fetchAll(PDO::FETCH_OBJ);
@@ -65,5 +69,13 @@ class Cart extends Database
         parent::insert("Cart_Item",
         "cart_id","product_id", "quantity",
          $cart_id, $product_id,  1);
+    }
+    public function getTotalPrice(string $id){
+        $query = "select sum(quantity*price) as total from Cart_Item inner join Product 
+        on product_id = Product.id where cart_id = ?";
+        $stmt = $this->db->prepare($query);
+        $res = $stmt->execute([$id]);
+        $data = $stmt->fetchAll(PDO::FETCH_OBJ);
+        return $data;
     }
 }
