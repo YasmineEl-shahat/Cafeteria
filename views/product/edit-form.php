@@ -11,7 +11,10 @@
     $product = $product->select_product($product_id);
 
     $edit_url="../../controller/product/edit-product.php?id={$product_id}";
-    if($_GET){
+    $img = $product['image'];
+    $edit_url .= "&imgPath={$img}";
+
+    if($_GET && array_key_exists("errors", $_GET)){
         $errors = json_decode($_GET['errors']);
         $errors = (array) $errors;
     }

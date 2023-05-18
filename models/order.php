@@ -38,11 +38,8 @@ class Order extends Database
         FROM User
         INNER JOIN `Order` ON User.id = `Order`.user_id;
         WHERE `Order`.status = 'outForDelivery'";
-        //  -- WHERE `Order`.status = 'proccessig'
-        $stmt = $this->db->prepare($query);
-        $stmt->execute();
-        $data = $stmt->fetchAll(PDO::FETCH_OBJ);
-        return $data;
+        //  -- WHERE `Order`.status = 'processing'
+        return Parent::execute_query_without_id($query);
     }
     public function userOrders(...$args) {
 
@@ -61,11 +58,7 @@ class Order extends Database
           LEFT JOIN Order_Item oi ON o.id = oi.order_id
           WHERE o.user_id = ?
          ";
-
-        $stmt = $this->db->prepare($query);
-        $res = $stmt->execute([$id]);
-        $data = $stmt->fetchAll(PDO::FETCH_OBJ);
-        $stmt->closeCursor();
+        $data=Parent::execute_query($query, $id);
         return $this->result($data);
     }
 
@@ -123,11 +116,14 @@ public function result($data){
         INNER JOIN Order_Item ON Product.id = Order_Item.product_id
         INNER JOIN `Order` ON Order_Item.order_id = `Order`.id
         WHERE `Order`.id = ?;
-        
         ";
-        $stmt = $this->db->prepare($query);
-        $res = $stmt->execute([$id]);
-        $data = $stmt->fetchAll(PDO::FETCH_OBJ);
-        return $data;
+        return Parent::execute_query($query, $id);
+    }
+    public function select_last_order_id(){
+        $query = 'SELECT `id` FROM `Order` ORDER BY `id` DESC LIMIT 1';
+        return Parent::execute_query_without_id($query);
+    }
+    public function insert_order_item(...$args){
+        parent::insert("Order_Item", ...$args);
     }
 }

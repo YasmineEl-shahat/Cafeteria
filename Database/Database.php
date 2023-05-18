@@ -1,12 +1,22 @@
 <?php
+// Load environment variables from .env file
+$env_path = dirname(__DIR__) . '/.env';
+if (file_exists($env_path)) {
+    $lines = file($env_path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    foreach ($lines as $line) {
+        putenv($line);
+    }
+  
+}
+
 class Database{
     protected $db;
     protected $dbname='php_nabila';
     private function connect(){
-        $dsn = 'mysql:dbname=php_nabila;host=nader-mo.tech;port=3306;'; 
-        $this->db= new PDO($dsn, 'php_nabila', 'Aa123456');
+        $dsn = "mysql:host=" . getenv('HOST') . ";port=" . getenv('PORT') . ";dbname=" . getenv('DB_NAME');
+        $this->db= new PDO($dsn,  getenv('USERNAME'), getenv('PASSWORD'));
     }
-    
+
     public function __construct(){
         $this->connect();
     }
@@ -87,5 +97,19 @@ class Database{
         $delete_stmt = $this->db->prepare($query);
         $delete_stmt->bindParam(':user_id', $id, PDO::PARAM_INT);
         $res=$delete_stmt->execute();
+    }
+
+    public function execute_query_without_id($query){
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        $data = $stmt->fetchAll(PDO::FETCH_OBJ);
+        return $data;
+    }
+    public function execute_query($query, $id){
+        $stmt = $this->db->prepare($query);
+        $res = $stmt->execute([$id]);
+        $data = $stmt->fetchAll(PDO::FETCH_OBJ);
+        $stmt->closeCursor();
+        return $data;
     }
 }

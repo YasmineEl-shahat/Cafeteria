@@ -1,20 +1,21 @@
 <?php
+include "../../guard/adminAuth.php";
+
+adminAuth("../auth/login-form.php");
 include '../layout/adminnavbar.php';
 include "../../models/user.php";
+include "../../models/product.php";
 include "../../controller/order/allUsersOrders.php";
 
 if (isset($_GET['from-date']) && isset($_GET['to-date']) && isset($_GET['name']) && $_GET['from-date'] != '' && $_GET['to-date'] != '' && $_GET['name'] != '') {
     $from_date = $_GET['from-date'];
     $to_date = $_GET['to-date'];
     $name = $_GET['name'];
-    $users=allUsersOrdersFilter($from_date,$to_date ,$name);
+    $users = allUsersOrdersFilter($from_date, $to_date, $name);
 } else {
-    $users=allUsersOrders();
-    
+    $users = allUsersOrders();
 }
 
-
-var_dump($users)
 
 ?>
 <section class="ftco-section ">
@@ -80,12 +81,12 @@ var_dump($users)
                                     <tr class='text-left'>
                                         <td>
                                             <i class='fas fa-plus' data-toggle='nested-table' data-target='#nested-div-<?php echo $user["user_id"] . "-" . $order_id; ?>'></i>
-                                            <?php echo $order_items[1]["order_date"]; ?>
+                                            <?php echo $order_items[0]["order_date"]; ?>
                                         </td>
                                         <td>
                                             <?php echo array_reduce($order_items, function ($total, $item) {
                                                 return $total + ($item["order_items"]["item_price"] * $item["order_items"]["item_quantity"]);
-                                            }, 0); ?>
+                                            }, 0) . '$'; ?>
                                         </td>
                                     </tr>
                                 <?php } ?>
@@ -93,17 +94,28 @@ var_dump($users)
                         </table>
 
                         <?php foreach ($user["orders"] as $order_id => $order_items) { ?>
-                            <div id="nested-div-<?php echo $user["user_id"] . "-" . $order_id; ?>" class="nested-table  mt-5 p-1 border">
-                                <div class="row">
-                                    <?php foreach ($order_items as $order_item) { ?>
-                                        <div class="col-3">
-                                            <img class="w-100 h-50" src="../../assets/images/about.jpg" />
-                                            <p>id:<?php echo $order_item["order_items"]["product_id"]; ?></p>
-                                            <p>quantity:<?php echo $order_item["order_items"]["item_quantity"]; ?></p>
-                                            <p>price:<?php echo  $order_item["order_items"]["item_price"] ?></p>
-                                            <p>total price:<?php echo  $order_item["order_items"]["item_price"] * $order_item["order_items"]["item_quantity"]; ?></p>
-                                        </div>
-                                    <?php } ?>
+                            <div id="nested-div-<?php echo $user["user_id"] . "-" . $order_id; ?>" class="nested-table  mt-5 p-1 ">
+                                <div class="container border">
+                                    <p class="h4 text-center mt-5 mb-2">Order Items</p>
+
+                                    <div class="row mt-5">
+                                        <?php foreach ($order_items as $order_item) { ?>
+                                            <?php
+                                            $productOject = new Product();
+                                            $product = $productOject->select_product($order_item["order_items"]["product_id"]) ?>
+
+                                            <div class="col-3 mt-3  text-center">
+                                                <div class="position-relative w-100 h-50 ml-3 mr-3">
+                                                    <img src="<?php echo $product['image']; ?>" class="rounded-circle w-75 h-100" alt="item image" />
+                                                    <span class="badge badge-secondary position-absolute top-0 start-50 translate-middle "><?php echo $order_item["order_items"]["item_quantity"]; ?></span>
+                                                </div>
+
+                                                <p><?php echo $product['name']; ?></p>
+                                                <p>Price:<?php echo  $order_item["order_items"]["item_price"] . '$' ?></p>
+                                                <p>Total price:<?php echo  $order_item["order_items"]["item_price"] * $order_item["order_items"]["item_quantity"] . '$'; ?></p>
+                                            </div>
+                                        <?php } ?>
+                                    </div>
                                 </div>
                             </div>
                         <?php } ?>

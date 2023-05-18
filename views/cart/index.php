@@ -36,7 +36,8 @@
                         <tbody>
                             <?php foreach($items as $item) { ?>
                             <tr class="text-center">
-                                <td class="product-remove"><a href="#"><span class="icon-close"></span></a></td>
+                                <td class="product-remove">
+                                    <a href="../../controller/cart/remove-from-cart.php?cart_id=<?php echo $cart_id ;?>&product_id=<?php echo $item->product_id ;?>"><span class="icon-close"></span></a></td>
                                 
                                 <td class="image-prod"><div class="img" style="background-image:url(<?php echo $item->image; ?>);"></div></td>
                                 
@@ -86,7 +87,7 @@
                         <span>$<?php echo $total-3.00; ?></span>
                     </p>
                 </div>
-                <p class="text-center"><a href="checkout.html" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>
+                <p class="text-center"><a href="../../controller/order/add-order.php?cart_id=<?php echo $cart_id ?>" class="btn btn-primary py-3 px-4">Proceed Order</a></p>
             </div>
         </div>
     </div>

@@ -54,7 +54,7 @@ if (isset($_GET['from-date']) && $_GET['from-date'] != '' && isset($_GET['to-dat
                                   <td>{$order['order_status']}</td>
                              ";
 
-                                if($order['order_status']=='proccessig') {
+                                if($order['order_status']=='processing') {
                                         $delete_url = "../../controller/order/delete-order.php?order_id={$order['order_id']}";
                                         echo "<td> <a href='" . "{$delete_url}" . "' class='btn btn-light'>Cancel</a> </td>";
 

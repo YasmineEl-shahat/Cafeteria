@@ -54,28 +54,43 @@ class Cart extends Database
         $data = $stmt->fetchAll(PDO::FETCH_OBJ);
         return $data;
     }
+   
     public function get_Cart_items(string $id)
     {
-        $query = "SELECT Cart_Item.id as id ,Product.name as name, Product.price as price, Product.image as image, Cart_Item.quantity as quantity
+        $query = "SELECT Cart_Item.id as id ,product_id, Product.name as name, Product.price as price, Product.image as image, Cart_Item.quantity as quantity
         FROM Product
         INNER JOIN Cart_Item ON Product.id = Cart_Item.product_id
         INNER JOIN `Cart` ON Cart_Item.cart_id = `Cart`.id where Cart.id=?";
-        $stmt = $this->db->prepare($query);
-        $res = $stmt->execute([$id]);
-        $data = $stmt->fetchAll(PDO::FETCH_OBJ);
-        return $data;
+        return Parent::execute_query($query, $id);
     }
     public function add_Cart_Item(int $cart_id, int $product_id){
         parent::insert("Cart_Item",
         "cart_id","product_id", "quantity",
          $cart_id, $product_id,  1);
     }
+    public function remove_Cart_Item(int $cart_id, int $product_id){
+        $query="Delete from Cart_Item where cart_id=:cart_id and product_id=:product_id";
+        $delete_stmt = $this->db->prepare($query);
+        $delete_stmt->bindParam(':cart_id', $cart_id, PDO::PARAM_INT);
+        $delete_stmt->bindParam(':product_id', $product_id, PDO::PARAM_INT);
+        $res=$delete_stmt->execute();
+    }
     public function getTotalPrice(string $id){
         $query = "select sum(quantity*price) as total from Cart_Item inner join Product 
         on product_id = Product.id where cart_id = ?";
+        return Parent::execute_query($query, $id);
+    }
+    public function clear_cart(string $id){
+        $query = "delete from Cart_Item where cart_id = ?";
+        return Parent::execute_query($query, $id);
+    }
+    public function is_in_cart(int $cart_id, int $product_id){
+        $query = "select product_id from Cart_Item where cart_id=:cart_id and product_id=:product_id";
         $stmt = $this->db->prepare($query);
-        $res = $stmt->execute([$id]);
-        $data = $stmt->fetchAll(PDO::FETCH_OBJ);
+        $stmt->bindParam(':cart_id', $cart_id, PDO::PARAM_INT);
+        $stmt->bindParam(':product_id', $product_id, PDO::PARAM_INT);
+        $res = $stmt->execute();
+        $data = $stmt->fetch(PDO::FETCH_ASSOC);
         return $data;
     }
 }

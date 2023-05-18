@@ -34,7 +34,7 @@
         // uploading image
         if($profile_name != ""){
             $imagePath = $_GET["imgPath"];
-            if(file_exists( $imagePath))  unlink($imagePath);
+            if(file_exists( $imagePath)  && is_file($imagePath))  unlink($imagePath);
             sys_get_temp_dir();
             move_uploaded_file($profile_tmp,"../../assets/images/users/{$profile_name}");
             $imagePath = "../../assets/images/users/{$profile_name}";

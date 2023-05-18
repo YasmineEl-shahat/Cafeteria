@@ -10,6 +10,9 @@ include "../../models/user.php";
 include "../../guard/adminAuth.php";
 
 adminAuth("../auth/login-form.php");
+if(empty($_SESSION) ){
+    header("location:../auth/login-form.php");
+}
 
 $user_id = $_GET['id'];
 $edit_url = "../../controller/user/edit-user.php?id={$user_id}";
