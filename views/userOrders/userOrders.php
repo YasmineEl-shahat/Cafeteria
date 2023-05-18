@@ -9,6 +9,7 @@ $order= new Order();
 if (isset($_GET['from-date']) && $_GET['from-date'] != '' && isset($_GET['to-date']) && $_GET['to-date'] != '' ) {
     $from_date = $_GET['from-date'];
     $to_date = $_GET['to-date'];
+
     $orders = $order->userOrdersSearchByDate($from_date, $to_date);
 } else {
     // Return all data by default

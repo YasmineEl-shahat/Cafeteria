@@ -1,5 +1,13 @@
 <?php
+// $_GET['id]
+// select * from product where id = $_GET['id']
+
+
+
+
+
 $old_val=$_GET['availaility'];
+
 if($old_val=='available')
 {
     $new_val='unavailable';

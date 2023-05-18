@@ -46,7 +46,7 @@ $db = new Order();
                             echo '<td style="vertical-align:top;">' . $order->room . '</td>';
                             echo '<td style="vertical-align:top;">' . $order->status . '</td>';
 
-                            $url = "../../controller/edit-status.php?status={$order->status}&id={$order->id}";
+                            $url = "../../controller/edit-status.php?id={$order->id}";
                             if ($order->status == 'done') {
                                 echo "<td style='color:#fff'> Done </td>";
                             } else {

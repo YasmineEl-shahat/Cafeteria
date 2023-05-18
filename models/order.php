@@ -107,10 +107,10 @@ public function result($data){
     oi.quantity as `item_quantity`
           FROM ".$this->dbname.".Order o
           LEFT JOIN Order_Item oi ON o.id = oi.order_id
-          WHERE o.user_id = ?
+          WHERE o.user_id = '$id'
           AND  (DATE_FORMAT(o.date_created, '%Y-%m-%d') BETWEEN DATE_FORMAT('$fromDate', '%Y-%m-%d') AND DATE_FORMAT('$toDate', '%Y-%m-%d')) ";
         $stmt = $this->db->prepare($query);
-        $res = $stmt->execute([$id]);
+        $res = $stmt->execute();
         $data = $stmt->fetchAll(PDO::FETCH_OBJ);
         $stmt->closeCursor();
         return $this->result($data);
