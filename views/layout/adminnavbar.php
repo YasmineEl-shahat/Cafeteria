@@ -70,8 +70,8 @@ if (session_status() == PHP_SESSION_NONE) {
           <li class="nav-item active"><a href="../adminHome/index.php" class="nav-link">Home</a></li>
           <li class="nav-item"><a href="../product/products-table.php" class="nav-link">Products</a></li>
           <li class="nav-item"><a href="../user/users-table.php" class="nav-link">Users</a></li>
-          <li class="nav-item"><a href="../userOrders/userOrders.php" class="nav-link">Search</a></li>
-          <li class="nav-item"><a href="../order/add-order.php" class="nav-link">Add Order</a></li>
+          <li class="nav-item"><a href="../allUsersChecks/allUsersChecks.php" class="nav-link">Checks</a></li>
+          <li class="nav-item"><a href="../order/admin-orders.php" class="nav-link">Orders</a></li>
           <li class="nav-item"><a href="../category/add-categoryForm.php" class="nav-link">Add Category</a></li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php echo $_SESSION['username']; ?></a>

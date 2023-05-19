@@ -36,6 +36,9 @@ else {
     $_SESSION["user_id"] = $user['id'];
     $_SESSION["username"]=$user['username'];
     $_SESSION["role"]=$user['is_admin'];
+    if($user['is_admin']==1)
+    header("Location:../../views/adminHome");
+    else
     header("Location:../../views/home");
 }
 

@@ -55,7 +55,7 @@ if (isset($_GET['userId'])) {
                         </div>
                     </section>
             </form>
-            <a href="../order/cart.php?user_id=<?php echo $userID; ?>" class="btn btn-primary btn-outline-primary" style="margin-left: 1rem;">Show Cart</a>
+            <a href="../order/cart.php?user_id=<?php echo $userID; ?>" class="btn btn-primary btn-outline-primary" style="margin-top: 1rem;margin-bottom: 1rem;">Show Cart</a>
             <div class="form-group">
                 <section class="row">
                     <div class="col-12">

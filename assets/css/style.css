@@ -12067,3 +12067,9 @@ textarea.form-control {
 .table-order tr td, .table-order tr th {
   border: 1px solid #dee2e6;
 }
+
+select option{
+  background-color: black;
+  color: white;
+  border-color: black ;
+}
