@@ -93,4 +93,9 @@ class Cart extends Database
         $data = $stmt->fetch(PDO::FETCH_ASSOC);
         return $data;
     }
+    public function admin_add_Cart_Item(int $cart_id, int $product_id, int $quantity){
+        parent::insert("Cart_Item",
+        "cart_id","product_id", "quantity",
+         $cart_id, $product_id,  $quantity);
+    }
 }

@@ -47,10 +47,10 @@ if ($_GET) {
           <div class="mb-3">
             <label class="form-label">Room No. </label>
             <select name="room" class="form-control">
-              <option value="" disabled>select room</option>
-              <option <?= $oldValues && $oldValues['room'] == 'Application1' ? ' selected="selected"' : ''; ?> value="Application1">Application1</option>
-              <option <?= $oldValues && $oldValues['room'] == 'Application2' ? ' selected="selected"' : ''; ?> value="Application2">Application2</option>
-              <option <?= $oldValues && $oldValues['room'] == 'cloud' ? ' selected="selected"' : ''; ?> value="cloud">cloud</option>
+              <option value="" disabled style="background-color:gray; color:aliceblue">select room</option>
+              <option <?= $oldValues && $oldValues['room'] == 'Application1' ? ' selected="selected"' : ''; ?> style="background-color:black" value="Application1">Application1</option>
+              <option <?= $oldValues && $oldValues['room'] == 'Application2' ? ' selected="selected"' : ''; ?> style="background-color:black" value="Application2">Application2</option>
+              <option <?= $oldValues && $oldValues['room'] == 'cloud' ? ' selected="selected"' : ''; ?> style="background-color:black" value="cloud">cloud</option>
             </select>
             <div class="text-danger"> <?php if (isset($errors['room']))  echo $errors['room']; ?></div>
 

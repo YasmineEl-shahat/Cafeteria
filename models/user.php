@@ -10,9 +10,17 @@ class User extends Database {
     }
     
     public function selectUsers() {
+        
         return parent::select("User");
     }
-    
+    public function getAllUsers() {
+        $query = "select * from ".$this->dbname.". User where is_admin = '0'";
+        $stmt = $this->db->prepare($query);
+        $res = $stmt->execute();
+        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $data;
+    }
+
     public function select_user(int $id) {
         return parent::select_item("User", $id);
     }

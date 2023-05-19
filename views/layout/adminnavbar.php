@@ -37,7 +37,8 @@ if (session_status() == PHP_SESSION_NONE) {
   <link rel="stylesheet" href="../../assets/css/style.css">
   <!-- Font Awesome CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/css/bootstrap-select.min.css" integrity="sha512-mR/b5Y7FRsKqrYZou7uysnOdCIJib/7r5QeJMFvLNHNhtye3xJp1TdJVPLtetkukFn227nKpXD9OjUc09lx97Q==" crossorigin="anonymous"
+  referrerpolicy="no-referrer" />
   <style>
     /* Hide all nested tables by default */
     .nested-table {
@@ -66,11 +67,11 @@ if (session_status() == PHP_SESSION_NONE) {
       </button>
       <div class="collapse navbar-collapse" id="ftco-nav">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item active"><a href="../home/index.php" class="nav-link">Home</a></li>
+          <li class="nav-item active"><a href="../adminHome/index.php" class="nav-link">Home</a></li>
           <li class="nav-item"><a href="../product/products-table.php" class="nav-link">Products</a></li>
           <li class="nav-item"><a href="../user/users-table.php" class="nav-link">Users</a></li>
           <li class="nav-item"><a href="../userOrders/userOrders.php" class="nav-link">Search</a></li>
-          <li class="nav-item"><a href="../order/admin-orders.php" class="nav-link">Orders</a></li>
+          <li class="nav-item"><a href="../order/add-order.php" class="nav-link">Add Order</a></li>
           <li class="nav-item"><a href="../category/add-categoryForm.php" class="nav-link">Add Category</a></li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php echo $_SESSION['username']; ?></a>

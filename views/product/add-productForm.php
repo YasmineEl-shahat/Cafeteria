@@ -37,7 +37,7 @@ include "../../guard/adminAuth.php";
                         $categories = $category->selectCategories();?>
                         <?php
                         foreach ($categories as $category) { ?>
-                            <option value="<?php echo $category->name ?>" style="background-color:gray"><?php echo $category->name ?></option>
+                            <option value="<?php echo $category->name ?>" style="background-color:black"><?php echo $category->name ?></option>
                     <?php } ?>
                     </select>
                 </div>
