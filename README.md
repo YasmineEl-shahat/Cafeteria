@@ -22,3 +22,7 @@ Admin:
 - When you click on the username his order’s info during the specified time period should be displayed.
 
 ## Demo-Preview
+
+
+https://github.com/YasmineEl-shahat/Cafeteria/assets/58048543/fbcc6472-9619-4e64-bf91-5b6211190e66
+
