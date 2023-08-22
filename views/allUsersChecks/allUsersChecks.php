@@ -1,4 +1,5 @@
 <?php
+
 include "../../guard/adminAuth.php";
 
 adminAuth("../auth/login-form.php");
